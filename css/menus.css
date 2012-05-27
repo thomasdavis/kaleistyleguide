@@ -1,0 +1,75 @@
+/*
+Name: Styleguide Menu Heading
+Description: The styleguide menu heading doubles up as a link back to the index page of the style guide
+Markup: <div class="style-menu"><ul class="styleguide-menu"><li><a class="styleguide-menu-heading">Menu heading</a></ul></div>
+*/
+.styleguide-menu-heading, .styleguide-menu-heading:visited {
+	font-size: 18px;
+	padding: 15px;
+	margin: 0;
+	color: #444;
+	background: #afafaf;
+	display: block;
+	text-decoration: none;
+}
+
+/*
+Description: To show that the menu heading is clickable we place a hover effect on it, see above
+*/
+.styleguide-menu-heading:hover {
+	color: #222;
+}
+
+/*
+Description: Let's remove the default ugly bullet points and also the annoying padding
+*/
+.styleguide-menu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/*
+Description: Using my below average design skills, I themed the list items
+
+Markup: <div class="style-menu"><ul class="styleguide-menu"><li>Blah</li><li>Blah</li></ul></div>
+*/
+.styleguide-menu li {
+	border-bottom: 1px solid #ebebeb;
+
+}
+
+/*
+Description: These list-items are created to be menu items in side of an unordered list
+Markup: <div class="style-menu"><ul class="styleguide-menu"><li><a href="">Menu Item 1</a></li><li><a href="">Menu Item 2</a></li></ul></div>
+*/
+.styleguide-menu li a {
+	padding: 5px 0px 5px 20px;
+	display: block;
+	height: 100%;
+	text-decoration: none;
+	color: #555;
+}
+
+/*
+Description: The menu items have hover effects to show that they are clickable and we reuse the style to show that they are active
+Markup: <div class="style-menu"><ul class="styleguide-menu"><li><a href="">Menu Item 1</a></li><li><a href="" class="active">Menu Item 2</a></li></ul></div>
+*/
+.styleguide-menu li a:hover,
+.styleguide-menu li a.active {
+	background: #f1f1f1a;
+	font-weight: bold;
+	color: #517c1a;
+}
+
+/*
+Description: List items with the class category are simply meant to be themed placeholders that organize style sheets into logical sections. Use the `Catergory:` property in your documentation to simulate.
+Markup: <div class="style-menu"><ul class="styleguide-menu"><li class="category">Category</li><li><a href="">Menu Item 1</a></li></ul></div>
+*/
+.styleguide-menu li.category {
+	padding: 5px 15px 5px 15px;
+	background: #ebebeb;
+	color: #333;
+	font-weight: bold;
+}
+

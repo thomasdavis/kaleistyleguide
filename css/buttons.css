@@ -1,0 +1,28 @@
+/*
+Name: Default button
+Description: A simple example showing a default button
+Markup: <button>Simple button</button>
+*/
+button {
+  padding: 10px;
+  background: #ebebeb;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+/*
+Markup: <button>Simple button</button>
+*/
+button:hover {
+	background: #fbfbfb;
+}
+
+/*
+Name: Blue button
+Description: Notice that our button above has no documentation!
+Markup: <button class="blue">Simple button</button>
+*/
+button.blue {
+	background: #000077;
+	color: #fff;
+}

@@ -1,0 +1,24 @@
+<a class="styleguide-menu-heading" href="#">Kalei Styleguide</a>
+<ul class="styleguide-menu">
+
+<% _.each(importRules, function (rule) { 
+	console.log(rule, 'asd');
+	if(rule.type === 101) {
+
+%>
+<li class="category"><%= rule.metadata.category %></li>
+<%
+		};
+	if(rule.type === 3) {
+		var name = rule.href.substr(rule.href.indexOf('(')+2, rule.href.indexOf(')')-rule.href.indexOf('(')-3);
+
+
+	%>
+
+	<li><a href="#/style/<%= name %>"><%= name %></a></li>
+
+<% 
+	}
+}); %>
+</ul>
+<div style="clear: both;"></div>

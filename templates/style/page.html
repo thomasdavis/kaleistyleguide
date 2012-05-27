@@ -1,0 +1,52 @@
+<ul class="css-rules">
+	<% 
+	var lastType = null;
+	var indexCounter = 0;
+	var cssObj = {};  _.each(stylesheet.cssRules, function(rule) { %>
+
+		<%
+			if(lastType === 1) {
+
+				cssObj = {};
+
+				comment = false;
+			}
+		if(rule.type === 101) {
+			comment = true;
+			var css = rule.parsedCssText;
+			css = css.replace('/*', '');
+			css = css.replace('*/', '');
+			var cssLines = css.split('\n');
+			_.each(cssLines, function(line){
+			 var splits = line.match(/([^:]*)\:(.*)/);
+				if(splits !== null) {
+					cssObj[splits[1].toLowerCase()] = splits[2];
+				}
+			});
+		}
+
+
+
+		if(rule.type === 1) {
+			var css = css_beautify(rule.parsedCssText);
+		%>
+
+<li>
+			<span class="css-rule-path"></span>
+			<h2><%= typeof cssObj.name !== 'undefined' ? cssObj.name + ' (' + rule.mSelectorText +')' : rule.mSelectorText %></h2>
+			<p><%= typeof cssObj.description !== 'undefined' ? cssObj.description : '<p class="no-documentation">No documentation</p>'%></p>
+			<% if(typeof cssObj.markup !== 'undefined') { %>
+			<h3>Template</h3>
+			<iframe class="style-demo" data-css="<style><%=  css %></style>" data-content='<%= typeof cssObj.markup !== 'undefined' ? cssObj.markup : 'No Markup'%>'></iframe>
+			<% }; %>
+			</div>
+			<h3>Css</h3>
+			<pre class="brush: css"><%=  css %></pre>
+	</li>
+	<% 
+}
+
+			lastType=rule.type;
+indexCounter++;
+}); %>
+</ul>

@@ -1,0 +1,25 @@
+/*
+Description: Simple style to remove padding and margin off the page body;
+*/
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Description: Attaches the stylesheet menu to a fixed position on the;
+*/
+.style-menu {
+	width: 300px;
+	position: fixed;
+}
+
+/*
+Description: Pushes the style page in from the fixed menu on the left.
+*/
+.style-page {
+	margin-left: 300px;
+	border-left: 1px solid #ebebeb;
+	padding: 20px;
+}
+
