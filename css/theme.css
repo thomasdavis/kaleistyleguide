@@ -1,25 +1,194 @@
 /*
-Description: Simple style to remove padding and margin off the page body;
+# Kalei Themes
+
+To make sure the code demo's are un-affected by Kaleis own styles we only set a few global styles
+
+The menu is fixed and the page contained simply aligns itself 200px from the left.
+
 */
+
 body {
-  margin: 0;
-  padding: 0;
+	background: #fff !important;
+	margin: 0 !important;
+  padding: 0 !important;
 }
 
-/*
-Description: Attaches the stylesheet menu to a fixed position on the;
-*/
-.style-menu {
-	width: 300px;
+.kalei-style-menu-container {
 	position: fixed;
 }
+.kalei-style-menu {
+	width: 200px;
+}
+.kalei-style-page {
+	margin-left: 200px;
+	padding: 20px;
+}
 
 /*
-Description: Pushes the style page in from the fixed menu on the left.
+## Headings and paragraphs
+```
+<div class="kalei-comments">
+	<h1>Heading 1</h1>
+	<h2>Heading 2</h2>
+	<h3>Heading 3</h3>
+	<h4>Heading 4</h4>
+	<h5>Heading 5</h5>
+	<h6>Heading 6</h6>
+	<p class="fixie"></p>
+	<ul>
+	  <li>List Item 1</li>
+	  <li>List Item 2</li>
+	  <li>List Item 3</li>
+	</ul>
+</div>
+```
 */
-.style-page {
-	margin-left: 300px;
-	border-left: 1px solid #ebebeb;
+
+.kalei-comments > h1,
+.kalei-comments > h2,
+.kalei-comments > h3,
+.kalei-comments > h4,
+.kalei-comments > h5,
+.kalei-comments > h5,
+.kalei-comments > h6,
+
+.kalei-styleguide-menu-heading > h1,
+.kalei-styleguide-menu > h3,
+
+.kalei-comments > p {
+  font-family: Arial;
+	padding: 10px;
+	margin: 0;
+	color: #444;
+
+}
+
+
+
+/*
+## CSS and Comments Layout 
+
+These styles make sure the css code block is floated to the right correctly and the comments on the left
+*/
+
+.kalei-style-page > .kalei-documentation {
+	margin-bottom: 50px;
+	position: relative;
+}
+.kalei-comments-container {
+	float: left;
+	width: 50%;
+}
+.kalei-comments-container.kalei-no-css {
+	float: left;
+	width: 100%;
+}
+
+ .kalei-css-container > pre > .kalei-css  {
+	position: absolute;
+	width: 48%;
+	right: 0;
+	border-radius: 3px;
+	border: 1px solid #ebebeb;
+
+	top: 5px;
+	bottom: 5px;
+	overflow: auto;
+	font-size: 11px;
+
+	white-space: pre-wrap; 
+}
+
+/*
+## Code demos
+
+When you use Markdown code blocks ```, Kalei automatically renders the code as HTML and beneath it shows the code block with syntax highlighting.
+```
+<pre>
+	<code>
+		.kalei-comments > pre > code, 
+		.kalei-css-container > pre > code {
+			font-size: 11px;
+			opacity: 0.7;
+			white-space: pre-wrap; 
+			padding: 10px;
+		}
+	</code>
+</pre>
+```
+*/
+.kalei-comments > pre > code, 
+.kalei-css-container > pre > code {
+	font-size: 11px;
+	opacity: 0.7;
+	white-space: pre-wrap; 
+	padding: 10px;
+}
+.kalei-comments > pre > code:hover, 
+.kalei-css-container > pre > code:hover {
+	opacity: 1;
+}
+.kalei-css-container.kalei-no-css {
+	display: none;
+}
+.kalei-comments >  pre {
+	margin: 0;	
+	border-bottom: 1px solid #ebebeb;
+}
+.kalei-comments {
+
+	background: #fff;
+	border-radius: 3px;
+	border: 1px solid #ebebeb;
+}
+body .codedemo {
+	position: relative;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAAXNSR0IArs4c6QAAAAZQTFRF+vr6////+o8bnQAAABBJREFUCB1jYPjPgBXhEAYAfr8P8bm+jEoAAAAASUVORK5CYII=);
 	padding: 20px;
+	border-top: 1px solid #ebebeb	;
+	border-bottom: 1px solid #ebebeb	;
+	font-size: 100%;
+}
+
+*:not(.codedemo) .kalei-styleguide-menu-heading h1 {
+	font-size: 18px;
+	margin: 0;
+	color: #444;
+}
+*:not(.codedemo) .kalei-styleguide-menu-heading, .styleguide-menu-heading:visited {
+	text-decoration: none;
+}
+
+*:not(.codedemo) .kalei-styleguide-menu-heading:hover {
+	color: #222;
+}
+
+*:not(.codedemo) .kalei-styleguide-menu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 200px;
+}
+.kalei-style-guide-menu > h3 {
+		color: #444;
+	font-weight: bold;
+	margin-top: 20px;
+
+}
+.kalei-styleguide-menu-link {
+	padding: 5px 0px 5px 20px;
+	display: block;
+	height: 100%;
+	text-decoration: none;
+	color: #555;
+	font-family: Arial;
+}
+
+
+.kalei-styleguide-menu-link:hover,
+.kalei-styleguide-menu-link.active {
+	background: #f1f1f1a;
+	font-weight: bold;
+	color: #517c1a;
 }
 

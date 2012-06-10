@@ -25,9 +25,9 @@ define([
 			});
 		});
 		router.on('route:defaultAction', function (actions) {
-			require(['views/dashboard/page'], function (DashboardPage) {
-        var dashboardPage = Vm.create(appView, 'DashboardPage', DashboardPage);
-        dashboardPage.render();
+      require(['views/style/page'], function (StylePage) {
+        var stylePage = Vm.create(appView, 'StylePage', StylePage, {style: 'styles.css'});
+        stylePage.render();
       });
 		});
 

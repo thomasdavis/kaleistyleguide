@@ -4,53 +4,63 @@ define([
   'backbone',
   'text!templates/style/menu.html',
   'jscssp',
-  'config'
+  'config',
+  'libs/marked/marked',
 ], function($, _, Backbone, dashboardPageTemplate, jscssp, config){
   var DashboardPage = Backbone.View.extend({
-    el: '.style-menu',
-    render: function () {
+    el: '.kalei-style-menu',
+    render: function () {   
       var that = this;
       that.$el.html('Loading styles');
       require(['text!' + config.css_path + '/styles.css'], function (styles) {
 
-        var parser = new jscssp();
-        var sheet = parser.parse(styles, false, true);
-        console.log(sheet);
-        var rules = [];
-        _.each(sheet.cssRules, function (rule){
-          var cssObj = {};
-          if(rule.type === 101) {
-            var css = rule.parsedCssText;
-            css = css.replace('/*', '');
-            css = css.replace('*/', '');
-            var cssLines = css.split('\n');
-            _.each(cssLines, function(line){
-             var splits = line.match(/([^:]*)\:(.*)/);
-              console.log(splits);
-              if(splits !== null) {
-                cssObj[splits[1].toLowerCase()] = splits[2];
-              }
-            });
-          };
-          rule.metadata = cssObj;
-          rules.push(rule);
-        });
-
-
-
-        var importRules = _.filter(sheet.cssRules, function (rule) {
-          if(rule.type === 3){
-            return true;
-          } 
-          console.log(rule.metadata + 'asasd');
-          if(rule.type === 101 && typeof rule.metadata.category !== 'undefined') {
-            return true;
-
-          }
-        });
         
      
-        $(that.el).html(_.template(dashboardPageTemplate, {_:_, importRules: importRules}));
+      var parser = new jscssp();
+        marked.setOptions({ sanitize: false, gfm: true });
+        var stylesheet = parser.parse(styles, false, true);
+        var menus = [];
+        var menuTitle = '';
+        var currentMenu = {
+          sheets: [],
+          category: ''
+
+        };
+
+        _.each(stylesheet.cssRules, function(rule) {
+          if(rule.type === 101) {
+            var comment = rule.parsedCssText;
+            comment = comment.replace('/*', '');
+            comment = comment.replace('*/', '');
+
+            var comments = marked.lexer(comment);
+            _.each(comments, function (comment) {
+              
+              if(comment.type === 'heading' && comment.depth === 1) {
+                menuTitle = marked.parser([comment]);
+              }
+              if(comment.type === 'heading' && comment.depth === 3) {
+                menus.push(_.extend({}, currentMenu));
+                currentMenu.sheets = [];
+                currentMenu.category = marked.parser([comment]);
+              }
+
+            });
+
+          }
+          if(rule.type === 3) {
+            var sheet = rule.href.substr(rule.href.indexOf('(')+2, rule.href.indexOf(')')-rule.href.indexOf('(')-3);
+            currentMenu.sheets.push(sheet);
+
+          }
+
+        });
+        menus.push(currentMenu);
+
+
+
+
+        $(that.el).html(_.template(dashboardPageTemplate, {_:_, menuTitle: menuTitle, menus: menus}));
         $('[href="' + window.location.hash + '"]').addClass('active');
       });
       

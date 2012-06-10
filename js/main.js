@@ -8,7 +8,8 @@ require.config({
     backbone: 'libs/backbone/backbone-min', // https://github.com/amdjs
     jscssp: 'libs/jscssp/jscssp',
     fixie: 'libs/fixie/fixie',
-
+	pagedown: 'libs/pagedown/converter',
+	
     // Require.js plugins
     text: 'libs/require/text',
     order: 'libs/require/order',

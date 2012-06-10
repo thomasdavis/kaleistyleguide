@@ -4,27 +4,81 @@ define([
   'backbone',
   'text!templates/style/page.html',
   'jscssp',
-  'config'
-], function($, _, Backbone, stylePageTemplate, jscssp, config){
+  'config',
+  'pagedown',
+  'libs/marked/marked',
+  'libs/highlight/highlight'
+], function($, _, Backbone, stylePageTemplate, jscssp, config, Pagedown, marked, hljs){
   var StylePage = Backbone.View.extend({
     el: '.style-page',
     render: function () {
+      $('head').append('<link rel="stylesheet" href="' + config.css_path + '" type="text/css" />');
+      var converter = new Pagedown.Converter();
       var that = this;
 		 require(['text!'+ config.css_path + '/' + this.options.style], function (stylesheet){
-       var parser = new jscssp();
-
+        var parser = new jscssp();
+        marked.setOptions({ sanitize: false, gfm: true });
         var stylesheet = parser.parse(stylesheet, false, true);
-        $(that.el).html(_.template(stylePageTemplate, {_:_, stylesheet: stylesheet}));
-        _.each($('iframe'), function(iframe) {
-          $(iframe).contents().find('body').html($(iframe).attr('data-content'));
-          if($(iframe).hasClass('all-styles')) {
-            $(iframe).contents().find('body').append('<style>'+stylesheet.cssText()+'</style>');
-          } else {
-            $(iframe).contents().find('body').append('<link rel="stylesheet" href="' + config.css_path + '/styles.css" />');
+        var blocks = [];
+        var currentBlock = {
+          comments: [],
+          css: ''
+
+        };
+
+        _.each(stylesheet.cssRules, function(rule) {
+    			if(rule.type === 101) {
+    			  var comment = rule.parsedCssText;
+            comment = comment.replace('/*', '');
+            comment = comment.replace('*/', '');
+            var comments = marked.lexer(comment);
+            _.each(comments, function (comment) {
+
+
+              if(comment.type === 'heading' && comment.depth <= 2) {
+                currentBlock.css = css_beautify(currentBlock.css);
+                if(currentBlock.comments.length !== 0 || currentBlock.css !== '') {
+                  currentBlock.comments = marked.parser(currentBlock.comments);
+                  blocks.push(_.extend({}, currentBlock));
+                  currentBlock.comments = [];
+                  currentBlock.css = '';
+                }
+              }
+              if(comment.type === 'code'){
+                currentBlock.comments.push({
+                  type: 'html',
+                  text: '<div class="codedemo">' + comment.text + '<div style="clear: both;"></div></div>'
+                })
+              };
+              currentBlock.comments.push(comment);
+            
+            });
+
+    			}
+          if(rule.type === 1) {
+            currentBlock.css += rule.parsedCssText;
+
           }
-         fixie.init($(':empty', $('iframe').contents().find('body')));
-        });
-        SyntaxHighlighter.highlight();
+          if(rule.type === 3) {
+            console.log(rule);
+            currentBlock.comments.push({
+                  type: 'code',
+                  text: rule.parsedCssText
+                });
+
+          }
+
+		    });
+   
+        currentBlock.css = css_beautify(currentBlock.css);
+
+        currentBlock.comments = marked.parser(currentBlock.comments);
+        blocks.push(currentBlock);
+        $(that.el).html(_.template(stylePageTemplate, {_:_, blocks: blocks, config: config}));
+        $(' code').each(function(i, e) {hljs.highlightBlock(e); });
+
+         fixie.init();
+        
       });
 
       
