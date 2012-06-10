@@ -8,19 +8,25 @@ The menu is fixed and the page contained simply aligns itself 200px from the lef
 */
 
 body {
-	background: #fff !important;
+	background: #E6EAB7 !important;
 	margin: 0 !important;
   padding: 0 !important;
 }
 
 .kalei-style-menu-container {
 	position: fixed;
+	background: #fff;
+	padding: 20px;
+	top: 20px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+
 }
 .kalei-style-menu {
-	width: 200px;
+	width: 240px;
 }
 .kalei-style-page {
-	margin-left: 200px;
+	margin-left: 240px;
 	padding: 20px;
 }
 
@@ -63,12 +69,27 @@ body {
 
 }
 
-
+.kalei-comments > p {
+	font-size: 12px;
+}
 
 /*
 ## CSS and Comments Layout 
 
 These styles make sure the css code block is floated to the right correctly and the comments on the left
+
+```
+<div class="kalei-documentation">
+
+	<div class="kalei-comments-container ">
+		<div class="kalei-comments ">
+			<p>This is a test Kalei comment.</p>
+		</div>
+	</div>
+	<div class="kalei-css-container "><pre><code class="kalei-css">a { color: #323; }</code></pre></div>
+
+</div>
+```
 */
 
 .kalei-style-page > .kalei-documentation {
@@ -76,24 +97,29 @@ These styles make sure the css code block is floated to the right correctly and 
 	position: relative;
 }
 .kalei-comments-container {
-	float: left;
 	width: 50%;
+	position: relative;
 }
 .kalei-comments-container.kalei-no-css {
 	float: left;
 	width: 100%;
 }
-
- .kalei-css-container > pre > .kalei-css  {
+.kalei-css-container {
 	position: absolute;
-	width: 48%;
+	width: 49%;
 	right: 0;
-	border-radius: 3px;
-	border: 1px solid #ebebeb;
-
-	top: 5px;
-	bottom: 5px;
+	top: 0px;
+	bottom: 0px;
 	overflow: auto;
+}
+ .kalei-css-container > pre {
+ 	margin: 0;
+ }
+ .kalei-css-container > pre > .kalei-css  {
+
+	border-radius: 6px;
+	border: 1px solid #ebebeb;
+	
 	font-size: 11px;
 
 	white-space: pre-wrap; 
@@ -120,12 +146,17 @@ When you use Markdown code blocks ```, Kalei automatically renders the code as H
 .kalei-comments > pre > code, 
 .kalei-css-container > pre > code {
 	font-size: 11px;
-	opacity: 0.7;
+
 	white-space: pre-wrap; 
 	padding: 10px;
 }
+.kalei-css-container,
+.kalei-comments > pre > code {
+
+		opacity: 0.5;
+}
 .kalei-comments > pre > code:hover, 
-.kalei-css-container > pre > code:hover {
+.kalei-css-container:hover  {
 	opacity: 1;
 }
 .kalei-css-container.kalei-no-css {
@@ -134,19 +165,33 @@ When you use Markdown code blocks ```, Kalei automatically renders the code as H
 .kalei-comments >  pre {
 	margin: 0;	
 	border-bottom: 1px solid #ebebeb;
+	border-left: 1px solid #ebebeb;
+	border-right: 1px solid #ebebeb;
 }
 .kalei-comments {
 
-	background: #fff;
-	border-radius: 3px;
-	border: 1px solid #ebebeb;
+padding: 20px;
+margin: 0 0 20px 0;
+background: 
+white;
+-webkit-border-radius: 6px;
+-moz-border-radius: 6px;
+border-radius: 6px;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+-o-box-sizing: border-box;
+box-sizing: border-box;
+-webkit-box-shadow: 1px 1px 2px 
+rgba(0, 0, 0, 0.1);
+-moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+box-shadow: 1px 1px 2px 
+rgba(0, 0, 0, 0.1);
 }
 body .codedemo {
 	position: relative;
 	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAAXNSR0IArs4c6QAAAAZQTFRF+vr6////+o8bnQAAABBJREFUCB1jYPjPgBXhEAYAfr8P8bm+jEoAAAAASUVORK5CYII=);
 	padding: 20px;
-	border-top: 1px solid #ebebeb	;
-	border-bottom: 1px solid #ebebeb	;
+	border: 1px solid #ebebeb	;
 	font-size: 100%;
 }
 
@@ -169,10 +214,11 @@ body .codedemo {
 	padding: 0;
 	width: 200px;
 }
-.kalei-style-guide-menu > h3 {
+.kalei-styleguide-menu > h3 {
 		color: #444;
 	font-weight: bold;
 	margin-top: 20px;
+	font-size: 11px;
 
 }
 .kalei-styleguide-menu-link {
@@ -182,6 +228,7 @@ body .codedemo {
 	text-decoration: none;
 	color: #555;
 	font-family: Arial;
+	font-size: 11px;
 }
 
 

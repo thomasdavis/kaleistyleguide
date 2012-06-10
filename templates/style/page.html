@@ -1,6 +1,4 @@
-<style>
 
-</style>
 <% _.each(blocks, function(block) { %>
 <div class="kalei-documentation">
 
@@ -15,8 +13,18 @@
 </div>
 
 <% }); %>
+<div class="kalei-documentation">
 
-<div id="disqus_thread"></div>
+	<div class="kalei-comments-container kalei-no-css">
+		<div class="kalei-comments ">
+		<div id="disqus_thread"></div>
+		</div>
+	</div>
+
+	<div style="clear: both;"></div>
+</div>
+
+
 <script type="text/javascript">
     var disqus_shortname = '<%= config.disqus_shortname %>'; // required: replace example with your forum shortname
     var disqus_url = window.location.href;
