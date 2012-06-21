@@ -5,5 +5,5 @@ define({
 	// You can configure any path by just deleteing the one above and uncommenting the one below to point at your css directory
 	//css_path: 'http://localhost/repos/budder-client/css/',
 
-	disqus_shortname: 'kaleistyleguide'
+	//disqus_shortname: 'kaleistyleguide'
 });

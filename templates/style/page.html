@@ -13,24 +13,3 @@
 </div>
 
 <% }); %>
-<div class="kalei-documentation">
-
-	<div class="kalei-comments-container kalei-no-css">
-		<div class="kalei-comments ">
-		<div id="disqus_thread"></div>
-		</div>
-	</div>
-
-	<div style="clear: both;"></div>
-</div>
-
-
-<script type="text/javascript">
-    var disqus_shortname = '<%= config.disqus_shortname %>'; // required: replace example with your forum shortname
-    var disqus_url = window.location.href;
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
