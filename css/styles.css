@@ -90,12 +90,5 @@ Kalei is heavily influenced by the following projects and blog posts.
 
 Public domain: http://unlicense.org/
 
-<script>
-    (function(d, t) {
-        var g = d.createElement(t),
-            s = d.getElementsByTagName(t)[0];
-        g.src = '//hnbutton.appspot.com/static/hn.js';
-        s.parentNode.insertBefore(g, s);
-    }(document, 'script'));
-</script>
+
 */
