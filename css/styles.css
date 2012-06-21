@@ -3,7 +3,9 @@
 
 This project aims at making sure your style sheets are fully documented whilst being synchronized with your webpages styles. To do this it actually uses your live stylesheets in so that at anytime you can review how your styleguide looks.
 
-[Github Repository](https://github.com/thomasdavis/kalei)
+<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=kalei&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
+
+<iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=thomasdavis&repo=kalei&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
 
 ## Goals and benefits
 
@@ -17,9 +19,10 @@ This project aims at making sure your style sheets are fully documented whilst b
 
 ## Getting started
 
-1. Download the repository (git clone git://github.com/thomasdavis/kalei.git)
+1. Download the repository (`git clone git://github.com/thomasdavis/kalei.git`)
 2. Serve it on a HTTP server and it should work!
 3. Edit `js/config.js` to point at your own `styles.css` 
+
 
 ## Author
 
@@ -50,3 +53,24 @@ Use the menu on the left to navigate.
 
 @import url("highlight/styles/github.css");
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+/*
+## Inspiration
+
+Kalei is heavily influenced by the following projects and blog posts.
+
+[Pea.rs](http://pea.rs/)
+
+[KSS](http://warpspire.com/posts/kss/)
+
+[StyleDocco](http://jacobrask.github.com/styledocco/)
+
+[RJ Metrics](http://info.rjmetrics.com/blog/bid/52753/Our-Living-Style-Guide-Writing-maintainable-HTML-CSS)
+
+*/
+
+/*
+## License 
+
+Public domain: http://unlicense.org/
+*/

@@ -59,6 +59,10 @@ body {
 .kalei-comments > h6,
 .kalei-comments > ul,
 .kalei-comments> ol,
+.kalei-comments> p a,
+.kalei-comments> p a:visited,
+.kalei-comments>  a:visited,
+.kalei-comments> a,
 .kalei-styleguide-menu-heading > h1,
 .kalei-styleguide-menu > h3,
 
@@ -69,6 +73,18 @@ body {
 	margin: 0;
 	color: #444;
 
+}
+.kalei-comments> p a,
+.kalei-comments> p a:visited {
+	padding: 0;
+}
+.kalei-comments > iframe {
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.kalei-comments > ul,
+.kalei-comments> ol {
+	margin-left: 20px;
 }
 .kalei-comments > ul,
 .kalei-comments> ol,
