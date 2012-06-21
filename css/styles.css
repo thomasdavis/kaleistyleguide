@@ -48,4 +48,5 @@ Use the menu on the left to navigate.
 
 /* ### Third Party ### */
 
-@import url("highlight/styles/solarized_light.css");
+@import url("highlight/styles/github.css");
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);

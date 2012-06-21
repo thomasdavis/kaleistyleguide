@@ -1,17 +1,22 @@
-<a class="kalei-styleguide-menu-heading" href="#"><%= menuTitle %></a>
+<div class="menu-items">
+	<a class="kalei-styleguide-menu-heading" href="#"><%= menuTitle %></a>
 
-
-<ul class="kalei-styleguide-menu">
-
-<% _.each(menus, function (menu) { %>
-
-	<%= menu.category %>
 
 	<ul class="kalei-styleguide-menu">
-		<% _.each(menu.sheets, function (sheet) { %>
 
-		<li><a class="kalei-styleguide-menu-link" href="#/style/<%= sheet %>"><%= sheet %></a></li>
-		<% }); %>
-	</ul>
-<% }); %>
-<div style="clear: both;"></div>
+	<% _.each(menus, function (menu) { %>
+
+		<%= menu.category %>
+
+		<ul class="kalei-styleguide-menu">
+			<% _.each(menu.sheets, function (sheet) { %>
+
+			<li><a class="kalei-styleguide-menu-link" href="#/style/<%= sheet %>"><%= sheet %></a></li>
+			<% }); %>
+		</ul>
+	<% }); %>
+	<div style="clear: both;"></div>
+</div>
+<div class="menu-expand">
+
+</div>

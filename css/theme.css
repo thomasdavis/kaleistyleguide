@@ -8,7 +8,7 @@ The menu is fixed and the page contained simply aligns itself 200px from the lef
 */
 
 body {
-	background: #E6EAB7 !important;
+	background: #f0f0f0 !important;
 	margin: 0 !important;
   padding: 0 !important;
 }
@@ -63,7 +63,8 @@ body {
 .kalei-styleguide-menu > h3,
 
 .kalei-comments > p {
-  font-family: Arial;
+
+  font-family: 'Open Sans', sans-serif;
 	padding: 10px;
 	margin: 0;
 	color: #444;
@@ -98,7 +99,7 @@ These styles make sure the css code block is floated to the right correctly and 
 	position: relative;
 }
 .kalei-comments-container {
-	width: 50%;
+	width: 60%;
 	position: relative;
 }
 .kalei-comments-container.kalei-no-css {
@@ -107,7 +108,7 @@ These styles make sure the css code block is floated to the right correctly and 
 }
 .kalei-css-container {
 	position: absolute;
-	width: 49%;
+	width: 39%;
 	right: 0;
 	top: 0px;
 	bottom: 0px;
