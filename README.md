@@ -30,7 +30,7 @@ This project aims at making sure your style sheets are fully documented whilst b
 
 Need more contributors to give it a nicer style and more functionality
 
-/*
+
 ## Inspiration
 
 Kalei is heavily influenced by the following projects and blog posts.
@@ -61,4 +61,5 @@ Kalei is heavily influenced by the following projects and blog posts.
 
 Public domain: http://unlicense.org/
 
-*/
+
+<img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66606907ns.gif" />
