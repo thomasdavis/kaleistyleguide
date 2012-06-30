@@ -12,7 +12,7 @@ define([
   var StylePage = Backbone.View.extend({
     el: '.style-page',
     render: function () {
-      $('head').append('<link rel="stylesheet" href="' + config.css_path + 'styles.css" type="text/css" />');
+      $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
       var converter = new Pagedown.Converter();
       var that = this;
 		 require(['text!'+ config.css_path + '/' + this.options.style], function (stylesheet){
