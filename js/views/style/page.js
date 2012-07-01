@@ -15,7 +15,8 @@ define([
       $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
       var converter = new Pagedown.Converter();
       var that = this;
-		 require(['text!'+ config.css_path + '/' + this.options.style], function (stylesheet){
+      var configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
+		 require(['text!'+ configDir + '/' + this.options.style], function (stylesheet){
         var parser = new jscssp();
         marked.setOptions({ sanitize: false, gfm: true });
         var stylesheet = parser.parse(stylesheet, false, true);
