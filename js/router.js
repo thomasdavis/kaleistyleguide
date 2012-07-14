@@ -8,7 +8,7 @@ define([
   var AppRouter = Backbone.Router.extend({
     routes: {
       // Pages
-      '/style/:style': 'style',	
+      '/style/*style': 'style',	
     
       // Default - catch all
       '*actions': 'defaultAction'
