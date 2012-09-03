@@ -45,28 +45,28 @@
  * ***** END LICENSE BLOCK ***** */
 define(function () {
 
-const kCHARSET_RULE_MISSING_SEMICOLON = "Missing semicolon at the end of @charset rule";
-const kCHARSET_RULE_CHARSET_IS_STRING = "The charset in the @charset rule should be a string";
-const kCHARSET_RULE_MISSING_WS = "Missing mandatory whitespace after @charset";
-const kIMPORT_RULE_MISSING_URL = "Missing URL in @import rule";
-const kURL_EOF = "Unexpected end of stylesheet";
-const kURL_WS_INSIDE = "Multiple tokens inside a url() notation";
-const kVARIABLES_RULE_POSITION = "@variables rule invalid at this position in the stylesheet";
-const kIMPORT_RULE_POSITION = "@import rule invalid at this position in the stylesheet";
-const kNAMESPACE_RULE_POSITION = "@namespace rule invalid at this position in the stylesheet";
-const kCHARSET_RULE_CHARSET_SOF = "@charset rule invalid at this position in the stylesheet";
-const kUNKNOWN_AT_RULE = "Unknow @-rule";
+var kCHARSET_RULE_MISSING_SEMICOLON = "Missing semicolon at the end of @charset rule";
+var kCHARSET_RULE_CHARSET_IS_STRING = "The charset in the @charset rule should be a string";
+var kCHARSET_RULE_MISSING_WS = "Missing mandatory whitespace after @charset";
+var kIMPORT_RULE_MISSING_URL = "Missing URL in @import rule";
+var kURL_EOF = "Unexpected end of stylesheet";
+var kURL_WS_INSIDE = "Multiple tokens inside a url() notation";
+var kVARIABLES_RULE_POSITION = "@variables rule invalid at this position in the stylesheet";
+var kIMPORT_RULE_POSITION = "@import rule invalid at this position in the stylesheet";
+var kNAMESPACE_RULE_POSITION = "@namespace rule invalid at this position in the stylesheet";
+var kCHARSET_RULE_CHARSET_SOF = "@charset rule invalid at this position in the stylesheet";
+var kUNKNOWN_AT_RULE = "Unknow @-rule";
 
 /* FROM http://peter.sh/data/vendor-prefixed-css.php?js=1 */
 
-const kENGINES = [
+var kENGINES = [
   "webkit",
   "presto",
   "trident",
   "generic"
 ];
 
-const kCSS_VENDOR_VALUES = {
+var kCSS_VENDOR_VALUES = {
   "-moz-box":             {"webkit": "-webkit-box",        "presto": "", "trident": "", "generic": "box" },
   "-moz-inline-box":      {"webkit": "-webkit-inline-box", "presto": "", "trident": "", "generic": "inline-box" },
   "-moz-initial":         {"webkit": "",                   "presto": "", "trident": "", "generic": "initial" },
@@ -92,7 +92,7 @@ const kCSS_VENDOR_VALUES = {
                            "generic": FilterRepeatingGradientForOutput }
 };
 
-const kCSS_VENDOR_PREFIXES = {"lastUpdate":1304175007,"properties":[{"gecko":"","webkit":"","presto":"","trident":"-ms-accelerator","status":"P"},
+var kCSS_VENDOR_PREFIXES = {"lastUpdate":1304175007,"properties":[{"gecko":"","webkit":"","presto":"","trident":"-ms-accelerator","status":"P"},
 {"gecko":"","webkit":"","presto":"-wap-accesskey","trident":"","status":""},
 {"gecko":"-moz-animation","webkit":"-webkit-animation","presto":"","trident":"","status":"WD"},
 {"gecko":"-moz-animation-delay","webkit":"-webkit-animation-delay","presto":"","trident":"","status":"WD"},
@@ -356,7 +356,7 @@ const kCSS_VENDOR_PREFIXES = {"lastUpdate":1304175007,"properties":[{"gecko":"",
 {"gecko":"","webkit":"-epub-writing-mode = -webkit-writing-mode","presto":"","trident":"","status":""},
 {"gecko":"","webkit":"zoom","presto":"","trident":"-ms-zoom","status":""}]};
 
-const kCSS_PREFIXED_VALUE = [
+var kCSS_PREFIXED_VALUE = [
   {"gecko": "-moz-box", "webkit": "-moz-box", "presto": "", "trident": "", "generic": "box"}
 ];
 
@@ -957,7 +957,7 @@ var CssInspector = {
 
   parseMediaQuery: function(aString)
   {
-    const kCONSTRAINTS = {
+    var kCONSTRAINTS = {
       "width": true,
       "min-width": true,
       "max-width": true,
