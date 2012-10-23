@@ -10,7 +10,7 @@ define([
   'libs/highlight/highlight'
 ], function($, _, Backbone, stylePageTemplate, jscssp, config, Pagedown, marked, hljs){
   var StylePage = Backbone.View.extend({
-    el: '.style-page',
+    el: '.kalei-style-page',
     render: function () {
       $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
       var converter = new Pagedown.Converter();
