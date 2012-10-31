@@ -7,16 +7,27 @@ define([
   'config',
   'pagedown',
   'libs/marked/marked',
-  'libs/highlight/highlight'
-], function($, _, Backbone, stylePageTemplate, jscssp, config, Pagedown, marked, hljs){
+  'libs/highlight/highlight',
+  'libs/parseuri/parseuri'
+], function($, _, Backbone, stylePageTemplate, jscssp, config, Pagedown, marked, hljs, parseuri){
   var StylePage = Backbone.View.extend({
     el: '.kalei-style-page',
     render: function () {
       $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
       var converter = new Pagedown.Converter();
       var that = this;
-      var configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
-		 require(['text!'+ configDir + '/' + this.options.style], function (stylesheet){
+      var styleUrl;
+      if(this.options.style.substr(0,1) === '/') {
+        // non relative
+        var configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
+        var pUrl = parseuri(configDir);
+        styleUrl = pUrl.protocol + '://' + pUrl.host + (pUrl.port === '' ? '' : ':'+ pUrl) + this.options.style;
+      } else {
+        var configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
+        styleUrl = configDir + '/' + this.options.style;
+      }
+      console.log('try', styleUrl)
+		 require(['text!'+ styleUrl], function (stylesheet){
         var parser = new jscssp();
         marked.setOptions({ sanitize: false, gfm: true });
         var stylesheet = parser.parse(stylesheet, false, true);
