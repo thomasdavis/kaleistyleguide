@@ -19,7 +19,7 @@ This project aims at making sure your style sheets are fully documented whilst b
 
 ## Getting started
 
-1. Download the repository (`git clone git://github.com/thomasdavis/kalei.git`)
+1. Download the repository (`git clone git://github.com/thomasdavis/kaleistyleguide.git`)
 2. Serve it on a HTTP server and it should work!
 3. Edit `js/config.js` to point at your own `styles.css` 
 
