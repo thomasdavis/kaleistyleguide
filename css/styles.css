@@ -44,21 +44,6 @@ Need more contributors to give it a nicer style and more functionality
 
 */
 
-@import url("theme.css");
-
-
-
-
-/* ### Example Buttons ### */
-
-@import url("buttons.css");
-@import url("fixie-demo.css");
-
-/* ### Third Party ### */
-
-@import url("highlight/styles/github.css");
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
-
 /*
 ## Inspiration and alternatives
 
@@ -92,3 +77,19 @@ Kalei is heavily influenced by the following projects and blog posts.
 Public domain: http://unlicense.org/
 
 */
+
+
+@import url("theme.css");
+
+
+
+
+/* ### Example Buttons ### */
+
+@import url("buttons.css");
+@import url("fixie-demo.css");
+
+/* ### Third Party ### */
+
+@import url("highlight/styles/github.css");
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
