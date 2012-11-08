@@ -8,7 +8,7 @@ The menu is fixed and the page contained simply aligns itself 200px from the lef
 */
 
 body {
-	background: #f0f0f0 !important;
+	background: #fff !important;
 	margin: 0 !important;
   padding: 0 !important;
 }
@@ -68,7 +68,7 @@ body {
 
 .kalei-comments > p {
 
-  font-family: 'Open Sans', sans-serif;
+  font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
 	padding: 10px;
 	margin: 0;
 	color: #444;
@@ -105,7 +105,6 @@ These styles make sure the css code block is floated to the right correctly and 
 			<p>This is a test Kalei comment.</p>
 		</div>
 	</div>
-	<div class="kalei-css-container "><pre><code class="kalei-css">a { color: #323; }</code></pre></div>
 
 </div>
 ```
@@ -115,33 +114,11 @@ These styles make sure the css code block is floated to the right correctly and 
 	position: relative;
 }
 .kalei-comments-container {
-	width: 60%;
+	width: 100%;
 	position: relative;
 }
-.kalei-comments-container.kalei-no-css {
-	float: left;
-	width: 100%;
-}
-.kalei-css-container {
-	position: absolute;
-	width: 39%;
-	right: 0;
-	top: 0px;
-	bottom: 0px;
-	overflow: auto;
-}
- .kalei-css-container > pre {
- 	margin: 0;
- }
- .kalei-css-container > pre > .kalei-css  {
 
-	border-radius: 6px;
-	border: 1px solid #ebebeb;
-	
-	font-size: 11px;
 
-	white-space: pre-wrap; 
-}
 
 /*
 ## Code demos
@@ -187,28 +164,27 @@ When you use Markdown code blocks ```, Kalei automatically renders the code as H
 	border-right: 1px solid #ebebeb;
 }
 .kalei-comments {
-
+	background: #f7f7f7;
 padding: 20px;
 margin: 0 0 20px 0;
 background: 
 white;
--webkit-border-radius: 6px;
--moz-border-radius: 6px;
-border-radius: 6px;
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
 -o-box-sizing: border-box;
 box-sizing: border-box;
--webkit-box-shadow: 1px 1px 2px 
+-webkit-box-shadow: 0px 0px 2px 
 rgba(0, 0, 0, 0.1);
 -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-box-shadow: 1px 1px 2px 
-rgba(0, 0, 0, 0.1);
+box-shadow: 0px 0px 3px #ccc;
 }
 body .codedemo {
 	position: relative;
 	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAAXNSR0IArs4c6QAAAAZQTFRF+vr6////+o8bnQAAABBJREFUCB1jYPjPgBXhEAYAfr8P8bm+jEoAAAAASUVORK5CYII=);
-	padding: 20px;
+	padding: 40px;
 	border: 1px solid #ebebeb	;
 	font-size: 100%;
 }
@@ -232,6 +208,24 @@ body .codedemo {
 	padding: 0;
 	width: 200px;
 }
+body .codedemo::after {
+	content: "Example";
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	padding: 3px 7px;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #517C1A;
+	color: #ebebeb;
+	-webkit-border-radius: 0px 0 4px 0;
+	-moz-border-radius: 0px 0 4px 0;
+	border-radius: 0px 0 4px 0;
+}
+
+
+
+
 .kalei-styleguide-menu > h3 {
 		color: #444;
 	font-weight: bold;

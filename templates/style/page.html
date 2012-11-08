@@ -2,13 +2,12 @@
 <% _.each(blocks, function(block) { %>
 <div class="kalei-documentation">
 
-	<div class="kalei-comments-container <%= block.css === '' ? 'kalei-no-css' : '' %>">
+	<div class="kalei-comments-container">
 		<div class="kalei-comments ">
 			<%= block.comments %>
 		</div>
 	</div>
 
-		<div class="kalei-css-container <%= block.css === '' ? 'kalei-no-css' : '' %>"><pre><code class="kalei-css"><%=  block.css %></code></pre></div>
 	<div style="clear: both;"></div>
 </div>
 

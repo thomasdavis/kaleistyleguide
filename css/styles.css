@@ -17,8 +17,18 @@ This project aims at making sure your style sheets are fully documented whilst b
 * Rapid development of projects by allowing developers to find the correct CSS and HTML for any given UI component
 * Open sourced so that all great ideas can be included
 
+## Example
 
+Easily show off examples of your components and the HTML to generate them
 
+```
+  <a href="" class="button">Button</a>
+  <a href="" class="button add">Add</a>
+  <a href="" class="button edit">Edit</a>
+  <a href="" class="button delete">Delete</a>
+  <a href="" class="button save">Save</a>
+  <a href="" class="button email">Send email</a>
+```
 
 
 ## Getting started
@@ -35,16 +45,6 @@ This project aims at making sure your style sheets are fully documented whilst b
 <a style="" href="https://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
 <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 
-Richard Barret
-
-Need more contributors to give it a nicer style and more functionality
-
-
-
-
-*/
-
-/*
 ## Inspiration and alternatives
 
 Kalei is heavily influenced by the following projects and blog posts.
@@ -76,6 +76,8 @@ Kalei is heavily influenced by the following projects and blog posts.
 
 Public domain: http://unlicense.org/
 
+## Stylesheets
+
 */
 
 
@@ -92,4 +94,3 @@ Public domain: http://unlicense.org/
 /* ### Third Party ### */
 
 @import url("highlight/styles/github.css");
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
