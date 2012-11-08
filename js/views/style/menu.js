@@ -63,11 +63,14 @@ define([
 
         $(that.el).html(_.template(dashboardPageTemplate, {_:_, menuTitle: menuTitle, menus: menus}));
         $('[href="' + window.location.hash + '"]').addClass('active');
+        if(window.location.hash === '') {
+          $('.js-kalei-home').addClass('active');
+        }
       });
       
     },
     events: {
-      'click a': function (ev) {
+      'click a.kalei-styleguide-menu-link': function (ev) {
         this.$el.find('a.active').removeClass('active');
         $(ev.currentTarget).addClass('active');
       }

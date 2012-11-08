@@ -13,6 +13,11 @@ define([
   var StylePage = Backbone.View.extend({
     el: '.kalei-style-page',
     render: function () {
+        $('a.kalei-styleguide-menu-link').removeClass('active');
+        $('[href="' + window.location.hash + '"]').addClass('active');
+        if(window.location.hash === '') {
+          $('.js-kalei-home').addClass('active');
+        }
       $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
       var converter = new Pagedown.Converter();
       var that = this;
