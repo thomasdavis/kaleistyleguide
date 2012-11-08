@@ -4,40 +4,40 @@
 This is an example button set taken from [Red Team Design](http://www.red-team-design.com/just-another-awesome-css3-buttons).
 
 
+## Action buttons
+
 ```
-<h2>Actions</h2>
 <a href="" class="button">Button</a>
 <a href="" class="button add">Add</a>
 <a href="" class="button edit">Edit</a>
 <a href="" class="button delete">Delete</a>
 <a href="" class="button save">Save</a>
 <a href="" class="button email">Send email</a>
+```
 
-<br><br>
+## Miscellaneous buttons
 
-<h2>Miscellaneous</h2>
+```
 <a href="" class="button like">Like</a>
 <a href="" class="button next">Next</a>
 <a href="" class="button star">Favourite</a>
 <a href="" class="button spark">Spark</a>
 <a href="" class="button play">Play</a>
+```
 
-<br><br>
-
-<h2>Social media buttons</h2>
-
+## Social media buttons
+```
 <a href="http://twitter.com/catalinred" class="button tw">Follow me</a>
 <a href="http://www.facebook.com/RedTeamDesign" class="button fb">Become a fan</a>
+```
 
-
-<h2>Buttons and inputs</h2>
-
+## Buttons and inputs
+```
 <button class="button">Clean button</button>
 <button class="button save">Button with icon</button>
 <button class="button" disabled>Disabled button</button>
 <button class="button save" disabled>Another disabled button</button>
 
-<br>
 <input class="button" type="submit" value="Input submit">
 <input class="button" type="button" value="Input button">
 <input class="button" type="submit" value="Input submit disabled" disabled>

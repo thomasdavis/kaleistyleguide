@@ -16,18 +16,17 @@ body {
 .kalei-style-menu-container {
 	position: fixed;
 	background: #fff;
-	padding: 20px;
 	top: 20px;
-	border-top-right-radius: 6px;
-	border-bottom-right-radius: 6px;
-
+	width: 300px;
 }
 .kalei-style-menu {
-	width: 240px;
 }
 .kalei-style-page {
-	margin-left: 240px;
+	border-left: 1px solid #ccc;
+	margin-left: 300px;
 	padding: 20px;
+	background: #f7f7f7;
+
 }
 
 /*
@@ -64,7 +63,7 @@ body {
 .kalei-comments>  a:visited,
 .kalei-comments> a,
 .kalei-styleguide-menu-heading > h1,
-.kalei-styleguide-menu > h3,
+.kalei-styleguide-menu > li > h3,
 
 .kalei-comments > p {
 
@@ -190,7 +189,7 @@ body .codedemo {
 }
 
 *:not(.codedemo) .kalei-styleguide-menu-heading h1 {
-	font-size: 18px;
+	font-size: 22px;
 	margin: 0;
 	color: #444;
 }
@@ -206,7 +205,6 @@ body .codedemo {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	width: 200px;
 }
 body .codedemo::after {
 	content: "Example";
@@ -226,28 +224,77 @@ body .codedemo::after {
 
 
 
-.kalei-styleguide-menu > h3 {
+.kalei-styleguide-menu > li > h3 {
 		color: #444;
 	font-weight: bold;
 	margin-top: 20px;
-	font-size: 11px;
+	font-size: 16px;
 
 }
 .kalei-styleguide-menu-link {
-	padding: 5px 0px 5px 20px;
+	padding: 10px 0px 10px 20px;
 	display: block;
 	height: 100%;
 	text-decoration: none;
 	color: #555;
 	font-family: Arial;
-	font-size: 11px;
+	font-size: 14px;
+	position: relative;
 }
 
 
 .kalei-styleguide-menu-link:hover,
 .kalei-styleguide-menu-link.active {
-	background: #f1f1f1a;
-	font-weight: bold;
-	color: #517c1a;
+	background: #444;
+	color: #ebebeb;
 }
 
+/* creates the smaller  triangle */
+.kalei-styleguide-menu-link:hover:after,
+.kalei-styleguide-menu-link.active:after {
+  content:"";
+  position:absolute;
+  bottom:-13px; /* value = - border-top-width - border-bottom-width */
+  right:0; /* value = (:before left) + (:before border-left) - (:after border-left) */
+  border-width:13px 13px 0;
+  border-style:solid;
+  border-color:#fff transparent;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
+}
+/* creates the smaller  triangle */
+.kalei-styleguide-menu-link:hover:before,
+.kalei-styleguide-menu-link.active:before {
+  content:"";
+  position:absolute;
+  bottom:-13px; /* value = - border-top-width - border-bottom-width */
+  right:0; /* value = (:before left) + (:before border-left) - (:after border-left) */
+  border-width:13px 13px 0;
+  border-style:solid;
+  border-color:#fff transparent;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
+}
+
+
+
+/* creates the smaller  triangle */
+.kalei-styleguide-menu-link:hover:before,
+.kalei-styleguide-menu-link.active:before {
+  top:14px; /* value = (:before top) + (:before border-top) - (:after border-top) */
+  bottom:auto;
+  right:-1px; /* value = - border-left-width - border-right-width */
+   border-width:6px 5px 6px 0px;
+  border-color:transparent #ccc;
+}
+/* creates the smaller  triangle */
+.kalei-styleguide-menu-link:hover:after,
+.kalei-styleguide-menu-link.active:after {
+  top:15px; /* value = (:before top) + (:before border-top) - (:after border-top) */
+  bottom:auto;
+  right:-2px; /* value = - border-left-width - border-right-width */
+   border-width:5px 5px 5px 0px;
+  border-color:transparent #f7f7f7;
+}
