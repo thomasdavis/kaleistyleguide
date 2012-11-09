@@ -8,6 +8,7 @@ The menu is fixed and the page contained simply aligns itself 200px from the lef
 */
 html, body, .kalei {
 	height: 100% !important;
+  background: #f7f7f7;
 }
 body {
 	background: #fff !important;
@@ -19,12 +20,12 @@ body {
 	position: fixed;
 	background: #fff;
 	height: 100%;
+  border-right: 1px solid #ccc;
 	width: 300px;
 }
 .kalei-style-menu {
 }
 .kalei-style-page {
-	border-left: 1px solid #ccc;
 	margin-left: 300px;
 	padding: 20px;
 	background: #f7f7f7;
