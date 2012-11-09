@@ -8,7 +8,7 @@ The menu is fixed and the page contained simply aligns itself 200px from the lef
 */
 html, body, .kalei {
 	height: 100% !important;
-  background: #f7f7f7;
+  background: #f6f4f4;
 }
 body {
 	background: #fff !important;
@@ -28,7 +28,7 @@ body {
 .kalei-style-page {
 	margin-left: 300px;
 	padding: 20px;
-	background: #f7f7f7;
+	background: #f6f4f4;
 }
 
 /*
@@ -48,6 +48,7 @@ body {
 	  <li>List Item 3</li>
 	</ul>
 </div>
+
 ```
 */
 
@@ -66,7 +67,7 @@ body {
 .kalei-comments> a,
 .kalei-styleguide-menu-heading > h1,
 .kalei-styleguide-menu > li > h3,
-
+.kalei-styleguide-menu-stylesheets,
 .kalei-comments > p {
 
   font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -149,7 +150,7 @@ When you use Markdown code blocks ```, Kalei automatically renders the code as H
 .kalei-css-container,
 .kalei-comments > pre > code {
 
-		opacity: 0.5;
+		opacity: 0.3;
 }
 .kalei-comments > pre > code:hover, 
 .kalei-css-container:hover  {
@@ -190,6 +191,8 @@ body .codedemo {
 *:not(.codedemo) .kalei-styleguide-menu-heading h1 {
 	font-size: 22px;
 	margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
 	color: #444;
   padding-left: 20px;
 }
@@ -218,11 +221,20 @@ body .codedemo::after {
 	color: #ebebeb;
 	-webkit-border-radius: 0px 0 4px 0;
 	-moz-border-radius: 0px 0 4px 0;
+  font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
 	border-radius: 0px 0 4px 0;
 }
 
 
-
+.kalei-styleguide-menu-stylesheets {
+      color: #fff;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 10px 20px;
+  background: #75eb33;
+  text-shadow: 0px 0px 1px #777;
+}
 
 .kalei-styleguide-menu > li > h3 {
 		color: #444;
