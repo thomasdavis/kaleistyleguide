@@ -249,7 +249,6 @@ body .codedemo::after {
 	color: #ebebeb;
 }
 
-/* creates the smaller  triangle */
 .kalei-styleguide-menu-link:hover:after,
 .kalei-styleguide-menu-link.active:after {
   content:"";
@@ -263,7 +262,6 @@ body .codedemo::after {
     display:block; 
     width:0;
 }
-/* creates the smaller  triangle */
 .kalei-styleguide-menu-link:hover:before,
 .kalei-styleguide-menu-link.active:before {
   content:"";
@@ -280,7 +278,6 @@ body .codedemo::after {
 
 
 
-/* creates the smaller  triangle */
 .kalei-styleguide-menu-link:hover:before,
 .kalei-styleguide-menu-link.active:before {
   top:14px; /* value = (:before top) + (:before border-top) - (:after border-top) */
@@ -289,7 +286,6 @@ body .codedemo::after {
    border-width:6px 5px 6px 0px;
   border-color:transparent #ccc;
 }
-/* creates the smaller  triangle */
 .kalei-styleguide-menu-link:hover:after,
 .kalei-styleguide-menu-link.active:after {
   top:15px; /* value = (:before top) + (:before border-top) - (:after border-top) */
