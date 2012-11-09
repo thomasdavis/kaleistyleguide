@@ -26,7 +26,7 @@ define([
 		});
 		router.on('route:defaultAction', function (actions) {
       require(['views/style/page'], function (StylePage) {
-        var stylePage = Vm.create(appView, 'StylePage', StylePage, {style: 'styles.css'});
+        var stylePage = Vm.create(appView, 'StylePage', StylePage, {style:null});
         stylePage.render();
       });
 		});

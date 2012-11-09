@@ -22,6 +22,9 @@ define([
       var converter = new Pagedown.Converter();
       var that = this;
       var styleUrl;
+      if(this.options.style === null) {
+        this.options.style = config.css_path.substr(config.css_path.lastIndexOf('/')+1);
+      }
       if(this.options.style.substr(0,1) === '/') {
         // non relative
         var configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
