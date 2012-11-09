@@ -15,6 +15,7 @@ define([
       console.log(config.css_path);
       require(['text!' + config.css_path], function (styles) {
 
+      var masterStyle = config.css_path.substr(config.css_path.lastIndexOf('/')+1);
         
      
       var parser = new jscssp();
@@ -61,7 +62,7 @@ define([
 
 
 
-        $(that.el).html(_.template(dashboardPageTemplate, {_:_, menuTitle: menuTitle, menus: menus}));
+        $(that.el).html(_.template(dashboardPageTemplate, {_:_, menuTitle: menuTitle, menus: menus, entry: masterStyle}));
         $('[href="' + window.location.hash + '"]').addClass('active');
         if(window.location.hash === '') {
           $('.js-kalei-home').addClass('active');
