@@ -16,7 +16,7 @@ h3.fixie-demo {
 	color: #444;
 }
 p.fixie-demo {
-	color: #614565;
+	color: #555	;
 }
 
 /*
@@ -36,4 +36,6 @@ p.fixie-demo {
 	margin-left: 10px;
 	width:60px;
 	height:60px;
+	padding: 2px;
+	border: 1px solid #ccc;
 }

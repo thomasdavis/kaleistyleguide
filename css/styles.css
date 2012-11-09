@@ -22,12 +22,20 @@ This project aims at making sure your style sheets are fully documented whilst b
 Easily show off examples of your components and the HTML to generate them
 
 ```
-  <a href="" class="button">Button</a>
-  <a href="" class="button add">Add</a>
-  <a href="" class="button edit">Edit</a>
-  <a href="" class="button delete">Delete</a>
-  <a href="" class="button save">Save</a>
-  <a href="" class="button email">Send email</a>
+<div class="actions button-container">
+    <a href="#" class="button primary">Compose new</a>
+    
+    <div class="button-group">
+        <a href="#" class="button primary">Archive</a>
+        <a href="#" class="button">Report spam</a>
+        <a href="#" class="button danger">Delete</a>
+    </div>
+                        
+    <div class="button-group minor-group">
+        <a href="#" class="button">Move to</a>
+        <a href="#" class="button">Labels</a>
+    </div>
+</div>
 ```
 
 
@@ -90,7 +98,6 @@ Public domain: http://unlicense.org/
 
 @import url("buttons.css");
 @import url("fixie-demo.css");
-
 /* ### Third Party ### */
 
-@import url("highlight/styles/github.css");
+@import url("highlight/styles/googlecode.css");
