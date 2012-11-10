@@ -164,7 +164,33 @@ When you use Markdown code blocks ```, Kalei automatically renders the code as H
 	border-bottom: 1px solid #ebebeb;
 	border-left: 1px solid #ebebeb;
 	border-right: 1px solid #ebebeb;
+  position: relative;
+  padding: 20px;
 }
+
+.kalei-comments >  pre> code::before {
+  content: "Code";
+  opacity: 0.3;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #444;
+  color: #ebebeb;
+  -webkit-border-radius: 0px 0 4px 0;
+  -moz-border-radius: 0px 0 4px 0;
+  font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
+  border-radius: 0px 0 4px 0;
+}
+
+
+.kalei-comments >  pre> code:hover::before {
+  opacity: 1;
+}
+
+
 .kalei-comments {
 	background: #f7f7f7;
 padding: 20px;
