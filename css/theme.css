@@ -166,6 +166,10 @@ When you use Markdown code blocks ```, Kalei automatically renders the code as H
 	border-right: 1px solid #ebebeb;
   position: relative;
   padding: 20px;
+
+-webkit-border-radius:  0 0 3px 3px;
+-moz-border-radius:  0 0 3px 3px;
+border-radius:  0 0 3px 3px;
 }
 
 .kalei-comments >  pre> code::before {
@@ -197,9 +201,9 @@ padding: 20px;
 margin: 0 0 20px 0;
 background: 
 white;
--webkit-border-radius: 2px;
--moz-border-radius: 2px;
-border-radius: 2px;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
 -o-box-sizing: border-box;
@@ -212,6 +216,9 @@ body .codedemo {
 	padding: 40px;
 	border: 1px solid #ebebeb	;
 	font-size: 100%;
+-webkit-border-radius: 3px 3px 0 0;
+-moz-border-radius: 3px 3px 0 0;
+border-radius: 3px 3px 0 0;
 }
 
 *:not(.codedemo) .kalei-styleguide-menu-heading h1 {
@@ -248,7 +255,7 @@ body .codedemo::after {
 	-webkit-border-radius: 0px 0 4px 0;
 	-moz-border-radius: 0px 0 4px 0;
   font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
-	border-radius: 0px 0 4px 0;
+	border-radius: 3px 0 3px 0;
 }
 
 
