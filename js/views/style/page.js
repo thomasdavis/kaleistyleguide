@@ -8,11 +8,13 @@ define([
   'pagedown',
   'libs/marked/marked',
   'libs/highlight/highlight',
-  'libs/parseuri/parseuri'
-], function($, _, Backbone, stylePageTemplate, jscssp, config, Pagedown, marked, hljs, parseuri){
+  'libs/parseuri/parseuri',
+  'libs/waypoints/waypoints'
+], function($, _, Backbone, stylePageTemplate, jscssp, config, Pagedown, marked, hljs, parseuri, waypoints){
   var StylePage = Backbone.View.extend({
     el: '.kalei-style-page',
     render: function () {
+      var that = this;
         $('a.kalei-styleguide-menu-link').removeClass('active');
         $('[href="' + window.location.hash + '"]').addClass('active');
         if(window.location.hash === '') {
@@ -45,6 +47,7 @@ define([
           css: ''
 
         };
+        var headings = [];
 
         _.each(stylesheet.cssRules, function(rule) {
     			if(rule.type === 101) {
@@ -56,6 +59,7 @@ define([
 
 
               if(comment.type === 'heading' && comment.depth <= 2) {
+                headings.push(comment.text);
                 currentBlock.css = css_beautify(currentBlock.css);
                 if(currentBlock.comments.length !== 0 || currentBlock.css !== '') {
                   currentBlock.comments = marked.parser(currentBlock.comments);
@@ -89,13 +93,33 @@ define([
           }
 
 		    });
-   
+      $('.sheet-submenu').slideUp(200);
         currentBlock.css = css_beautify(currentBlock.css);
-
+        var submenu = $('<ul>');
+        _.each(headings, function (heading) {
+          submenu.append($('<li>').text(heading));
+        });
+        $('li:first-child', submenu).addClass('active');
+        $('.sheet-submenu', $('[data-sheet="' + that.options.style + '"]')).html(submenu).slideDown(200);
         currentBlock.comments = marked.parser(currentBlock.comments);
         blocks.push(currentBlock);
         $(that.el).html(_.template(stylePageTemplate, {_:_, blocks: blocks, config: config}));
         $(' code').each(function(i, e) {hljs.highlightBlock(e); });
+
+        $('.kalei-comments-container > .kalei-comments > h2, .kalei-comments-container > .kalei-comments  > h1').waypoint(function(ev) {
+          console.log(arguments);
+         $('.sheet-submenu li').removeClass('active');
+           $('.sheet-submenu li:contains('+$(ev.currentTarget).text()+')').addClass('active');
+        }, {
+   offset: 20  // middle of the page
+});
+
+        $("body").on('click', '.sheet-submenu li', function(ev) {
+
+             $('html, body').animate({
+                 scrollTop: $(".kalei-comments h2:contains('"+$(ev.currentTarget).text()+"'),.kalei-comments h1:contains('"+$(ev.currentTarget).text()+"')").offset().top - 20
+             }, 200);
+         });
 
          fixie.init();
         

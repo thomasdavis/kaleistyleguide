@@ -15,7 +15,9 @@ body {
 	margin: 0 !important;
   padding: 0 !important;
 }
-
+.menu-items {
+  height: 100%;
+}
 .kalei-style-menu-container {
 	position: fixed;
 	background: #fff;
@@ -23,7 +25,10 @@ body {
   border-right: 1px solid #ccc;
 	width: 300px;
 }
-.kalei-style-menu {
+.kalei-styleguide-menu {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .kalei-style-page {
 	margin-left: 300px;
@@ -67,6 +72,7 @@ body {
 .kalei-comments> a,
 .kalei-styleguide-menu-heading > h1,
 .kalei-styleguide-menu > li > h3,
+.sheet-submenu  li,
 .kalei-styleguide-menu-stylesheets,
 .kalei-comments > p {
 
@@ -283,6 +289,7 @@ body .codedemo::after {
 	height: 100%;
 	text-decoration: none;
 	color: #555;
+  font-weight: bold;
 	font-family: Arial;
 	font-size: 14px;
 	position: relative;
@@ -340,3 +347,18 @@ body .codedemo::after {
    border-width:5px 5px 5px 0px;
   border-color:transparent #f7f7f7;
 }
+
+.sheet-submenu li.active {
+  background: #ebebeb;
+}
+
+.sheet-submenu ul {
+  margin: 0;
+  padding: 0;
+}
+.sheet-submenu li {
+  padding: 10px 10px 10px 40px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
