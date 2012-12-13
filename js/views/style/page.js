@@ -122,6 +122,23 @@ define([
          });
 
          fixie.init();
+         
+
+         // Clone items that beg for it
+         var $clones = jQuery('[class*="clone-"]');
+         $clones.each(function () {
+           var $self = $(this),
+               cloneVolume = $self.attr('class').match( 'clone-[0-9]*' );
+   		// better regex to streamline this
+   	       if (cloneVolume) {
+                number = cloneVolume[0].split('-').pop();
+                
+                for (var i = 0; i < number; i++) {
+                  var $clone = $self.clone();
+                  $self.after($clone);
+                }
+              }
+         });         
         
       });
 
