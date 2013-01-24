@@ -67,7 +67,7 @@ define([
 
 			// parse comments with MarkDown
 			_.each(tree.rules, function(rule) {
-				if (rule.value !== undefined && rule.rules === undefined) {
+				if (rule.value !== undefined && rule.rules === undefined && !rule.variable) {
 					var comment = rule.value;
 		            comment = comment.replace('/*', '');
 		            comment = comment.replace('*/', '');
