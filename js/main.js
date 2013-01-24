@@ -6,10 +6,10 @@ require.config({
     jquery: 'libs/jquery/jquery-min',
     underscore: 'libs/underscore/underscore-min', // https://github.com/amdjs
     backbone: 'libs/backbone/backbone-min', // https://github.com/amdjs
-    jscssp: 'libs/jscssp/jscssp',
+    less: 'libs/less/less-1.3.3',
     fixie: 'libs/fixie/fixie',
 	pagedown: 'libs/pagedown/converter',
-	
+
     // Require.js plugins
     text: 'libs/require/text',
     order: 'libs/require/order',
