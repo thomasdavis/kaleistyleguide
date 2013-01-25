@@ -69,6 +69,12 @@ define([
 			_.each(tree.rules, function(rule) {
 				if (rule.value !== undefined && rule.rules === undefined && !rule.variable) {
 					var comment = rule.value;
+
+					// skip single-line comments
+					if (comment.substr(0, 2) == '//') {
+						return;
+					}
+
 		            comment = comment.replace('/*', '');
 		            comment = comment.replace('*/', '');
 
