@@ -48,7 +48,7 @@ define([
       // render all the CSS we need to deal with
       $('head').append($sheet);
       less.sheets.push($sheet[0]);
-      less.refresh();
+      less.refresh(true);
 
       // parse it for demo markup and render to the page
 	   require(['text!'+ styleUrl], function (stylesheet){
