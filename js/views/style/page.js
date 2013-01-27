@@ -14,8 +14,7 @@ define([
   var StylePage = Backbone.View.extend({
     el: '.kalei-style-page',
     render: function () {
-      var that = this,
-      	  $sheet = $('<link rel="stylesheet/less" href="' + config.css_path + '" />');
+      var that = this, $sheet;
 
       // update menu to indicate what's being viewed
         $('a.kalei-styleguide-menu-link').removeClass('active');
@@ -25,7 +24,7 @@ define([
         }
 
       // determine the URL to the style we're currently viewing
-      var styleUrl;
+      var styleUrl, isLess;
       if(this.options.style === null) {
         this.options.style = config.css_path.substr(config.css_path.lastIndexOf('/')+1);
       }
@@ -39,6 +38,8 @@ define([
         styleUrl = configDir + '/' + this.options.style;
       }
 
+      isLess = this.options.style.match(/\.less$/i) !== null;
+
       // init the LESS parser
       var parser = new(less.Parser)({
 			paths: [configDir + '/', './'], 		// Specify search paths for @import directives
@@ -46,9 +47,16 @@ define([
 		});
 
       // render all the CSS we need to deal with
-      $('head').append($sheet);
-      less.sheets.push($sheet[0]);
-      less.refresh(true);
+
+      if (isLess) {
+      	$sheet = $('<link rel="stylesheet/less" href="' + config.css_path + '" />')
+		$('head').append($sheet);
+		less.sheets.push($sheet[0]);
+		less.refresh(true);
+      } else {
+      	$sheet = $('<link rel="stylesheet" href="' + config.css_path + '" />')
+		$('head').append($sheet);
+      }
 
       // parse it for demo markup and render to the page
 	   require(['text!'+ styleUrl], function (stylesheet){
