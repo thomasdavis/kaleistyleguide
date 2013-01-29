@@ -111,8 +111,6 @@ define([
 		            });
 				}
 			});
-
-			currentBlock.css += tree.toCSS();	// append all CSS to the input
 		});
 
 		// draw menu
