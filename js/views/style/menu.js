@@ -37,7 +37,7 @@ define([
 			if (err) { return console.error(err); }
 
 		_.each(tree.rules, function(rule) {
-          if (rule.value !== undefined && rule.rules === undefined) {
+          if (rule.value !== undefined && rule.rules === undefined && $.type(rule.value) == 'string') {
             var comment = rule.value;
             comment = comment.replace('/*', '');
             comment = comment.replace('*/', '');
