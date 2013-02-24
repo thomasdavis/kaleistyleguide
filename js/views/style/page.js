@@ -23,25 +23,25 @@ define([
       $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
       var converter = new Pagedown.Converter();
       var markedOpts = _.extend({ sanitize: false, gfm: true }, config.marked_options || {});
-      var that = this;
       var styleUrl;
+      var configDir;
       if(this.options.style === null) {
         this.options.style = config.css_path.substr(config.css_path.lastIndexOf('/')+1);
       }
       if(this.options.style.substr(0,1) === '/') {
         // non relative
-        var configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
+        configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
         var pUrl = parseuri(configDir);
         styleUrl = pUrl.protocol + '://' + pUrl.host + (pUrl.port === '' ? '' : ':'+ pUrl) + this.options.style;
       } else {
-        var configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
+        configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
         styleUrl = configDir + '/' + this.options.style;
       }
-      console.log('try', styleUrl)
+      console.log('try', styleUrl);
      require(['text!'+ styleUrl], function (stylesheet){
         var parser = new jscssp();
         marked.setOptions(markedOpts);
-        var stylesheet = parser.parse(stylesheet, false, true);
+        stylesheet = parser.parse(stylesheet, false, true);
         var blocks = [];
         var currentBlock = {
           links: {},
@@ -77,8 +77,8 @@ define([
                 currentBlock.comments.push({
                   type: 'html',
                   text: '<div class="codedemo">' + comment.text + '<div style="clear: both;"></div></div>'
-                })
-              };
+                });
+              }
               currentBlock.comments.push(comment);
             
             });
@@ -121,12 +121,12 @@ define([
 
         $("body").on('click', '.sheet-submenu li', function(ev) {
 
-             $('html, body').animate({
-                 scrollTop: $(".kalei-comments h2:contains('"+$(ev.currentTarget).text()+"'),.kalei-comments h1:contains('"+$(ev.currentTarget).text()+"')").offset().top - 20
-             }, 200);
-         });
+          $('html, body').animate({
+            scrollTop: $(".kalei-comments h2:contains('"+$(ev.currentTarget).text()+"'),.kalei-comments h1:contains('"+$(ev.currentTarget).text()+"')").offset().top - 20
+          }, 200);
+        });
 
-         fixie.init();
+        fixie.init();
         
       });
 

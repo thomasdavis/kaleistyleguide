@@ -5,11 +5,11 @@ define([
   'text!templates/style/menu.html',
   'jscssp',
   'config',
-  'libs/marked/marked',
+  'libs/marked/marked'
 ], function($, _, Backbone, dashboardPageTemplate, jscssp, config, marked){
   var DashboardPage = Backbone.View.extend({
     el: '.kalei-style-menu',
-    render: function () {   
+    render: function () {
       var that = this;
       that.$el.html('Loading styles');
       console.log(config.css_path);
