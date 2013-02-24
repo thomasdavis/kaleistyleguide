@@ -22,6 +22,7 @@ define([
         }
       $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
       var converter = new Pagedown.Converter();
+      var markedOpts = _.extend({ sanitize: false, gfm: true }, config.marked_options || {});
       var that = this;
       var styleUrl;
       if(this.options.style === null) {
@@ -37,9 +38,9 @@ define([
         styleUrl = configDir + '/' + this.options.style;
       }
       console.log('try', styleUrl)
-		 require(['text!'+ styleUrl], function (stylesheet){
+     require(['text!'+ styleUrl], function (stylesheet){
         var parser = new jscssp();
-        marked.setOptions({ sanitize: false, gfm: true });
+        marked.setOptions(markedOpts);
         var stylesheet = parser.parse(stylesheet, false, true);
         var blocks = [];
         var currentBlock = {

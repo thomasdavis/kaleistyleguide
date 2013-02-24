@@ -6,7 +6,7 @@ define([
   'jscssp',
   'config',
   'libs/marked/marked',
-], function($, _, Backbone, dashboardPageTemplate, jscssp, config){
+], function($, _, Backbone, dashboardPageTemplate, jscssp, config, marked){
   var DashboardPage = Backbone.View.extend({
     el: '.kalei-style-menu',
     render: function () {   
@@ -17,9 +17,10 @@ define([
 
       var masterStyle = config.css_path.substr(config.css_path.lastIndexOf('/')+1);
         
+      var markedOpts = _.extend({ sanitize: false, gfm: true }, config.marked_options || {});
      
       var parser = new jscssp();
-        marked.setOptions({ sanitize: false, gfm: true });
+        marked.setOptions(markedOpts);
         var stylesheet = parser.parse(styles, false, true);
         var menus = [];
         var menuTitle = '';
