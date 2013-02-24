@@ -37,15 +37,18 @@ define([
             comment = comment.replace('*/', '');
 
             var comments = marked.lexer(comment);
+            var defLinks = comments.links || {};
             _.each(comments, function (comment) {
+              var tokens = [comment];
+              tokens.links = defLinks;
               
               if(comment.type === 'heading' && comment.depth === 1) {
-                menuTitle = marked.parser([comment]);
+                menuTitle = marked.parser(tokens);
               }
               if(comment.type === 'heading' && comment.depth === 3) {
                 menus.push(_.extend({}, currentMenu));
                 currentMenu.sheets = [];
-                currentMenu.category = marked.parser([comment]);
+                currentMenu.category = marked.parser(tokens);
               }
 
             });

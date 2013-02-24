@@ -44,6 +44,7 @@ define([
         var stylesheet = parser.parse(stylesheet, false, true);
         var blocks = [];
         var currentBlock = {
+          links: {},
           comments: [],
           css: ''
 
@@ -51,14 +52,16 @@ define([
         var headings = [];
 
         _.each(stylesheet.cssRules, function(rule) {
-    			if(rule.type === 101) {
-    			  var comment = rule.parsedCssText;
+          if(rule.type === 101) {
+            var comment = rule.parsedCssText;
             comment = comment.replace('/*', '');
             comment = comment.replace('*/', '');
             var comments = marked.lexer(comment);
+            var defLinks = comments.links || {}; // lexer appends definition links to returned token object
+            currentBlock.comments.links = defLinks;
+
             _.each(comments, function (comment) {
-
-
+              
               if(comment.type === 'heading' && comment.depth <= 2) {
                 headings.push(comment.text);
                 currentBlock.css = css_beautify(currentBlock.css);
@@ -66,6 +69,7 @@ define([
                   currentBlock.comments = marked.parser(currentBlock.comments);
                   blocks.push(_.extend({}, currentBlock));
                   currentBlock.comments = [];
+                  currentBlock.comments.links = defLinks;
                   currentBlock.css = '';
                 }
               }
@@ -79,7 +83,7 @@ define([
             
             });
 
-    			}
+          }
           if(rule.type === 1) {
             currentBlock.css += rule.parsedCssText;
 
@@ -93,7 +97,7 @@ define([
 
           }
 
-		    });
+        });
       $('.sheet-submenu').slideUp(200);
         currentBlock.css = css_beautify(currentBlock.css);
         var submenu = $('<ul>');
