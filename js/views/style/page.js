@@ -22,27 +22,29 @@ define([
         }
       $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
       var converter = new Pagedown.Converter();
-      var that = this;
+      var markedOpts = _.extend({ sanitize: false, gfm: true }, config.marked_options || {});
       var styleUrl;
+      var configDir;
       if(this.options.style === null) {
         this.options.style = config.css_path.substr(config.css_path.lastIndexOf('/')+1);
       }
       if(this.options.style.substr(0,1) === '/') {
         // non relative
-        var configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
+        configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
         var pUrl = parseuri(configDir);
         styleUrl = pUrl.protocol + '://' + pUrl.host + (pUrl.port === '' ? '' : ':'+ pUrl) + this.options.style;
       } else {
-        var configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
+        configDir = config.css_path.substr(0, config.css_path.lastIndexOf('/'));
         styleUrl = configDir + '/' + this.options.style;
       }
-      console.log('try', styleUrl)
-		 require(['text!'+ styleUrl], function (stylesheet){
+      console.log('try', styleUrl);
+     require(['text!'+ styleUrl], function (stylesheet){
         var parser = new jscssp();
-        marked.setOptions({ sanitize: false, gfm: true });
-        var stylesheet = parser.parse(stylesheet, false, true);
+        marked.setOptions(markedOpts);
+        stylesheet = parser.parse(stylesheet, false, true);
         var blocks = [];
         var currentBlock = {
+          links: {},
           comments: [],
           css: ''
 
@@ -50,14 +52,16 @@ define([
         var headings = [];
 
         _.each(stylesheet.cssRules, function(rule) {
-    			if(rule.type === 101) {
-    			  var comment = rule.parsedCssText;
+          if(rule.type === 101) {
+            var comment = rule.parsedCssText;
             comment = comment.replace('/*', '');
             comment = comment.replace('*/', '');
             var comments = marked.lexer(comment);
+            var defLinks = comments.links || {}; // lexer appends definition links to returned token object
+            currentBlock.comments.links = defLinks;
+
             _.each(comments, function (comment) {
-
-
+              
               if(comment.type === 'heading' && comment.depth <= 2) {
                 headings.push(comment.text);
                 currentBlock.css = css_beautify(currentBlock.css);
@@ -65,6 +69,7 @@ define([
                   currentBlock.comments = marked.parser(currentBlock.comments);
                   blocks.push(_.extend({}, currentBlock));
                   currentBlock.comments = [];
+                  currentBlock.comments.links = defLinks;
                   currentBlock.css = '';
                 }
               }
@@ -72,13 +77,13 @@ define([
                 currentBlock.comments.push({
                   type: 'html',
                   text: '<div class="codedemo">' + comment.text + '<div style="clear: both;"></div></div>'
-                })
-              };
+                });
+              }
               currentBlock.comments.push(comment);
             
             });
 
-    			}
+          }
           if(rule.type === 1) {
             currentBlock.css += rule.parsedCssText;
 
@@ -92,7 +97,7 @@ define([
 
           }
 
-		    });
+        });
       $('.sheet-submenu').slideUp(200);
         currentBlock.css = css_beautify(currentBlock.css);
         var submenu = $('<ul>');
@@ -116,12 +121,12 @@ define([
 
         $("body").on('click', '.sheet-submenu li', function(ev) {
 
-             $('html, body').animate({
-                 scrollTop: $(".kalei-comments h2:contains('"+$(ev.currentTarget).text()+"'),.kalei-comments h1:contains('"+$(ev.currentTarget).text()+"')").offset().top - 20
-             }, 200);
-         });
+          $('html, body').animate({
+            scrollTop: $(".kalei-comments h2:contains('"+$(ev.currentTarget).text()+"'),.kalei-comments h1:contains('"+$(ev.currentTarget).text()+"')").offset().top - 20
+          }, 200);
+        });
 
-         fixie.init();
+        fixie.init();
         
       });
 
