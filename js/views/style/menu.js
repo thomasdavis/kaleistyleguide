@@ -5,11 +5,11 @@ define([
   'text!templates/style/menu.html',
   'jscssp',
   'config',
-  'libs/marked/marked',
-], function($, _, Backbone, dashboardPageTemplate, jscssp, config){
+  'libs/marked/marked'
+], function($, _, Backbone, dashboardPageTemplate, jscssp, config, marked){
   var DashboardPage = Backbone.View.extend({
     el: '.kalei-style-menu',
-    render: function () {   
+    render: function () {
       var that = this;
       that.$el.html('Loading styles');
       console.log(config.css_path);
@@ -17,9 +17,10 @@ define([
 
       var masterStyle = config.css_path.substr(config.css_path.lastIndexOf('/')+1);
         
+      var markedOpts = _.extend({ sanitize: false, gfm: true }, config.marked_options || {});
      
       var parser = new jscssp();
-        marked.setOptions({ sanitize: false, gfm: true });
+        marked.setOptions(markedOpts);
         var stylesheet = parser.parse(styles, false, true);
         var menus = [];
         var menuTitle = '';
@@ -36,15 +37,18 @@ define([
             comment = comment.replace('*/', '');
 
             var comments = marked.lexer(comment);
+            var defLinks = comments.links || {};
             _.each(comments, function (comment) {
+              var tokens = [comment];
+              tokens.links = defLinks;
               
               if(comment.type === 'heading' && comment.depth === 1) {
-                menuTitle = marked.parser([comment]);
+                menuTitle = marked.parser(tokens);
               }
               if(comment.type === 'heading' && comment.depth === 3) {
                 menus.push(_.extend({}, currentMenu));
                 currentMenu.sheets = [];
-                currentMenu.category = marked.parser([comment]);
+                currentMenu.category = marked.parser(tokens);
               }
 
             });
