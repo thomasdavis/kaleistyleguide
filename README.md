@@ -2,7 +2,7 @@
 
 This project aims at making sure your style sheets are fully documented whilst being synchronized with your webpages styles. To do this it actually uses your live stylesheets in so that at anytime you can review how your styleguide looks.
 
-
+ 
 
 ## Main goals and benefits
 
