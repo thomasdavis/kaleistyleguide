@@ -6,13 +6,13 @@ This project aims at making sure your style sheets are fully documented whilst b
 
 This website is a live example generated from Kalei's style.css
 
-<iframe src="http://ghbtns.com//github-btn.html?user=thomasdavis&repo=kaleistyleguide&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
+<iframe src="http://ghbtns.com//github-btn.html?user=kaleistyleguide&repo=kaleistyleguide&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
 
-<iframe src="http://ghbtns.com//github-btn.html?user=thomasdavis&repo=kaleistyleguide&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
+<iframe src="http://ghbtns.com//github-btn.html?user=kaleistyleguide&repo=kaleistyleguide&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
 
 ## Getting started
 
-1. Download the repository (`git clone git://github.com/thomasdavis/kaleistyleguide.git`)
+1. Download the repository (`git clone git://github.com/kaleistyleguide/kaleistyleguide.git`)
 2. Serve it on a HTTP server and it should work!
 3. Edit `js/config.js` to point at your own `styles.css` 
 
@@ -52,6 +52,10 @@ Easily show off examples of your components and the HTML to generate them
 ## Author
 
 [Thomas Davis](http://thomasdavis.github.com)
+
+Luke Brooker
+
+Richard Barret
 
 <a style="" href="https://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
 <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
