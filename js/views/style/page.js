@@ -2,28 +2,37 @@ define([
 'jquery',
 'underscore',
 'backbone',
-'text!templates/style/page.html',
-'jscssp',
-'config',
-'pagedown',
 'libs/marked/marked',
+'text!templates/style/page.html',
+'config',
+'jscssp',
+'pagedown',
 'libs/highlight/highlight',
 'libs/parseuri/parseuri',
-'libs/waypoints/waypoints'
+'libs/waypoints/waypoints',
+'libs/less/less-1.3.3.min'
 ],
-function($, _, Backbone, stylePageTemplate, jscssp, config, Pagedown, marked, hljs, parseuri, waypoints){
+function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hljs, parseuri, waypoints){
+    var that = null;
     var StylePage = Backbone.View.extend({
         el: '.kalei-style-page',
         render: function () {
-            var that = this;
+            that = this;
+
             $('a.kalei-styleguide-menu-link').removeClass('active');
-            $('[href="' + window.location.hash + '"]').addClass('active');
             if(window.location.hash === '') {
                 $('.js-kalei-home').addClass('active');
+            } else {
+                $('[href="' + window.location.hash + '"]').addClass('active');
             }
-            $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
-            var converter = new Pagedown.Converter();
-            var markedOpts = _.extend({ sanitize: false, gfm: true }, config.marked_options || {});
+
+            // $("head").find("link").attr("href", function (i, value) {
+            //     if (value != config.css_path){
+            //         $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
+            //     }
+            // });
+
+
             var styleUrl;
             var configDir;
 
@@ -41,95 +50,209 @@ function($, _, Backbone, stylePageTemplate, jscssp, config, Pagedown, marked, hl
                 styleUrl = configDir + '/' + this.options.style;
             }
 
+            console.log('try', configDir);
             console.log('try', styleUrl);
+            //LOAD STYLESHEET TO WORK ON
             require(['text!'+ styleUrl], function (stylesheet){
-                var parser = new jscssp();
-                marked.setOptions(markedOpts);
-                stylesheet = parser.parse(stylesheet, false, true);
-                var blocks = [];
-                var currentBlock = {
-                    links: {},
-                    comments: [],
-                    css: ''
-                };
-                var headings = [];
+                var parser = null;
+                var regex = /(?:.*\/)(.*)\.(css|less|sass)$/gi;
+                var result = regex.exec(styleUrl);
+                //result[0] Original Input
+                //result[1] Filename
+                //result[2] Extension
 
-                _.each(stylesheet.cssRules, function(rule) {
-                    if(rule.type === 101) {
-                        var comment = rule.parsedCssText;
-                        comment = comment.replace('/*', '');
-                        comment = comment.replace('*/', '');
-                        var comments = marked.lexer(comment);
-                        var defLinks = comments.links || {}; // lexer appends definition links to returned token object
-                        currentBlock.comments.links = defLinks;
 
-                        _.each(comments, function (comment) {
+                var page = {blocks:[]};
 
-                            if(comment.type === 'heading' && comment.depth <= 2) {
-                                headings.push(comment.text);
-                                currentBlock.css = css_beautify(currentBlock.css);
-                                if(currentBlock.comments.length !== 0 || currentBlock.css !== '') {
-                                    currentBlock.comments = marked.parser(currentBlock.comments);
-                                    blocks.push(_.extend({}, currentBlock));
-                                    currentBlock.comments = [];
-                                    currentBlock.comments.links = defLinks;
-                                    currentBlock.css = '';
-                                }
-                            }
-                            if(comment.type === 'code'){
-                                currentBlock.comments.push({
-                                    type: 'html',
-                                    text: '<div class="codedemo">' + comment.text + '<div style="clear: both;"></div></div>'
-                                });
-                            }
-                            currentBlock.comments.push(comment);
+                switch (result[2]) {
+                    case 'css':
+                            parser = new jscssp();
+                            stylesheet = parser.parse(stylesheet, false, true);
+                            page = that.compute_css(stylesheet);
+                        break;
+                    case 'less':
+                            parser = new(less.Parser)({
+                                paths: [configDir + '/'], // Specify search paths for @import directives
+                            });
+                            parser.parse(stylesheet, function (err, tree) {
+                                stylesheet = tree;
+                            });
+                            page = that.compute_less(stylesheet);
+                        break;
+                    case 'sass':
+                        console.log("Error", "Unsupported style type.");
+                        /*require(['sass'], function (sass){
+                            //parse
+                        });*/
+                        break;
+                }
 
-                        });
+                console.log((new Date()).getTime() + " bottom", page)
 
-                    }
-                    if(rule.type === 1) {
-                    currentBlock.css += rule.parsedCssText;
 
-                    }
-                    if(rule.type === 3) {
-                        console.log(rule);
-                            currentBlock.comments.push({
-                            type: 'code',
-                            text: rule.parsedCssText
-                        });
-                    }
-
-                });
-                $('.sheet-submenu').slideUp(200);
-                currentBlock.css = css_beautify(currentBlock.css);
+                $('.kalei-sheet-submenu').slideUp(200);
                 var submenu = $('<ul>');
-                _.each(headings, function (heading) {
-                    submenu.append($('<li>').text(heading));
+
+                ////////////NEEDS TO BE EXPORTED TO Menu.js
+                _.each(page.blocks, function (block) {
+                    if (block.heading != "") {
+                        submenu.append($('<li>').text(block.heading));
+                    }
                 });
                 $('li:first-child', submenu).addClass('active');
-                $('.sheet-submenu', $('[data-sheet="' + that.options.style + '"]')).html(submenu).slideDown(200);
-                currentBlock.comments = marked.parser(currentBlock.comments);
-                blocks.push(currentBlock);
-                $(that.el).html(_.template(stylePageTemplate, {_:_, blocks: blocks, config: config}));
+                $('.kalei-sheet-submenu', $('[data-sheet="' + that.options.style + '"]')).html(submenu).slideDown(200);
+                ////////////NEEDS TO BE EXPORTED TO Menu.js
+
+                $(that.el).html(_.template(stylePageTemplate, {_:_, page: page, config: config}));
+
+                //Colour Coding in code Block
                 $(' code').each(function(i, e) {hljs.highlightBlock(e); });
 
+
                 $('.kalei-comments-container > .kalei-comments > h2, .kalei-comments-container > .kalei-comments  > h1').waypoint(function(ev) {
-                    console.log(arguments);
-                    $('.sheet-submenu li').removeClass('active');
-                    $('.sheet-submenu li:contains('+$(ev.currentTarget).text()+')').addClass('active');
+                    $('.kalei-sheet-submenu li').removeClass('active');
+                    $('.kalei-sheet-submenu li:contains('+$(ev.currentTarget).text()+')').addClass('active');
                 }, {
                     offset: 20  // middle of the page
                 });
 
-                $("body").on('click', '.sheet-submenu li', function(ev) {
+                $(".kalei-sheet-submenu li").on('click', function(ev) {
                     $('html, body').animate({
-                    scrollTop: $(".kalei-comments h2:contains('"+$(ev.currentTarget).text()+"'),.kalei-comments h1:contains('"+$(ev.currentTarget).text()+"')").offset().top - 20
+                        scrollTop: $(".kalei-comments h2:contains('"+$(ev.currentTarget).text()+"'),.kalei-comments h1:contains('"+$(ev.currentTarget).text()+"')").offset().top - 20
                     }, 200);
                 });
 
                 fixie.init();
             });
-        }
+        },
+
+        compute_css: function(stylesheet) {
+            console.log("compute_css()")
+            var page = {
+                blocks:[],
+                css:"",
+                stylesheets: []
+            };
+            console.log(stylesheet)
+            _.each(stylesheet.cssRules, function(rule) {
+                switch (rule.type) {
+                    case 1: //Standard rule?
+                        break;
+                    case 3: //Import Rule (@import)
+                        //we need to import jsscp doesnt compile imports
+                        stylesheet.deleteRule(rule);
+                        break;
+                    case 101: //Comment Block
+                        page.blocks = page.blocks.concat(that.parse_commentblock(rule.parsedCssText))
+                        break;
+                }
+            });
+
+            page.css = stylesheet.cssText()
+
+            var parser = new(less.Parser);
+            var stylesheet
+            page.css = ".kalei-style-page{" + page.css + "}"
+            parser.parse(page.css, function (err, tree) {
+                stylesheet = tree;
+            });
+
+            page.css = stylesheet.toCSS({ compress: true });
+            return page;
+        },
+
+        compute_less: function(stylesheet) {
+            console.log("compute_less()", stylesheet)
+            var page = {
+                blocks:[],
+                css:"",
+                stylesheets: []
+            };
+
+            _.each(stylesheet.rules, function(rule) {
+                if (rule.silent != null){ //Comment block
+                    page.blocks = page.blocks.concat(that.parse_commentblock(rule.value))
+                    //page.blocks.push();
+                } else if (rule.rules != null) { //Standard Rule
+
+                } else if (rule.path != null) { //Import Rule
+                    // var previous_heading = page.blocks.length - 1;
+                    // if (typeof page.blocks[previous_heading].import_rule == "undefined") {
+                    //     page.blocks[previous_heading].import_rule = []
+                    // }
+                    // page.blocks[previous_heading].import_rule.push(rule.path)
+
+                }
+            });
+
+
+            page.css = stylesheet.toCSS({ compress: true });
+            page.css = ".kalei-style-page{" + page.css + "}";
+            page.css = stylesheet.toCSS({ compress: true });
+            return page;
+        },
+
+        parse_commentblock: function (comment_block_text) {
+            //Remove /* & */
+            comment_block_text = comment_block_text.replace(/(?:\/\*)|(?:\*\/)/gi, '');
+
+            marked.setOptions(_.extend({ sanitize: false, gfm: true }, config.marked_options || {}));
+            var lexedCommentblock = marked.lexer(comment_block_text);
+            var lexerLinks = lexedCommentblock.links || {}; // lexer appends definition links to returned token object
+
+            var return_val = [];
+            var block_def = {
+                content: [],
+                heading: "",
+            };
+            var block = _.clone(block_def);
+
+            _.each(lexedCommentblock, function (comment) {
+                switch (comment.type) {
+                    case "code":
+                        //Push the code for an example
+                        block.content.push({
+                          type: 'html',
+                          text: '<div class="codedemo">' + comment.text + '<div style="clear: both;"></div></div>'
+                        });
+                        //Push the code section so marked can parse it as a <pre><code> block
+                        block.content.push(comment);
+                        break;
+                    case "heading":
+                        if (block.heading != "") {  //Multiple headings in one comment block
+                                                    //We want to break them up
+                            //Parse the content blocks and return the HTML to display
+                            block.content.links = lexerLinks
+                            block.content = marked.parser(block.content)
+                            return_val.push(block);
+                            block = _.clone(block_def);
+                        }
+                        if (comment.depth <= 2) {
+                            block.heading = comment.text;
+                            block.content.push(comment);
+                        } else if (comment.depth == 3) { //Import statement title
+                            block.stylesheet = comment.text;
+                            //block.heading = "Stylesheets"
+                            //this is an import statement
+                            //if ($.inArray("Stylesheets", ))
+                            //console.log("else", comment)
+                        }
+                        break;
+                    default:
+                        //Push everything else
+                        block.content.push(comment);
+                        break;
+                } //Switch
+            });
+
+            //Parse the content blocks and return the HTML to display
+            block.content.links = lexerLinks
+            block.content = marked.parser(block.content)
+
+            return_val.push(block);
+            return return_val;
+        },
+
     });
     return StylePage;
 });
