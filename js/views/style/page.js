@@ -52,8 +52,7 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hl
 
             console.log('try', configDir);
             console.log('try', styleUrl);
-            //LOAD STYLESHEET TO WORK ON
-            require(['text!'+ styleUrl], function (stylesheet){
+            require(['text!'+ styleUrl], function (stylesheet) {
                 var parser = null;
                 var regex = /(?:.*\/)(.*)\.(css|less|sass)$/gi;
                 var result = regex.exec(styleUrl);
