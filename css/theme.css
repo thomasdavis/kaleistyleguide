@@ -3,7 +3,7 @@
 
 To make sure the code demo's are un-affected by Kaleis own styles we only set a few global styles
 
-The menu is fixed and the page contained simply aligns itself 200px from the left.
+The menu is **fixed** and the page contained simply aligns itself 200px from the left.
 
 */
 html, body, .kalei {
@@ -16,7 +16,7 @@ body {
   padding: 0 !important;
 }
 .menu-items {
-  height: 100%;
+
 }
 .kalei-style-menu-container {
 	position: fixed;
@@ -72,7 +72,7 @@ body {
 .kalei-comments> a,
 .kalei-styleguide-menu-heading > h1,
 .kalei-styleguide-menu > li > h3,
-.sheet-submenu  li,
+.kalei-sheet-submenu  li,
 .kalei-styleguide-menu-stylesheets,
 .kalei-comments > p {
 
@@ -101,7 +101,7 @@ body {
 }
 
 /*
-## CSS and Comments Layout 
+## CSS and Comments Layout
 
 These styles make sure the css code block is floated to the right correctly and the comments on the left
 
@@ -135,22 +135,22 @@ When you use Markdown code blocks ```, Kalei automatically renders the code as H
 ```
 <pre>
 	<code>
-		.kalei-comments > pre > code, 
+		.kalei-comments > pre > code,
 		.kalei-css-container > pre > code {
 			font-size: 11px;
 			opacity: 0.7;
-			white-space: pre-wrap; 
+			white-space: pre-wrap;
 			padding: 10px;
 		}
 	</code>
 </pre>
 ```
 */
-.kalei-comments > pre > code, 
+.kalei-comments > pre > code,
 .kalei-css-container > pre > code {
 	font-size: 11px;
 
-	white-space: pre-wrap; 
+	white-space: pre-wrap;
 	padding: 10px;
 }
 .kalei-css-container,
@@ -158,7 +158,7 @@ When you use Markdown code blocks ```, Kalei automatically renders the code as H
 
 		opacity: 0.3;
 }
-.kalei-comments > pre > code:hover, 
+.kalei-comments > pre > code:hover,
 .kalei-css-container:hover  {
 	opacity: 1;
 }
@@ -166,7 +166,7 @@ When you use Markdown code blocks ```, Kalei automatically renders the code as H
 	display: none;
 }
 .kalei-comments >  pre {
-	margin: 0;	
+	margin: 0;
 	border-bottom: 1px solid #ebebeb;
 	border-left: 1px solid #ebebeb;
 	border-right: 1px solid #ebebeb;
@@ -205,7 +205,7 @@ border-radius:  0 0 3px 3px;
 	background: #f7f7f7;
 padding: 20px;
 margin: 0 0 20px 0;
-background: 
+background:
 white;
 -webkit-border-radius: 3px;
 -moz-border-radius: 3px;
@@ -312,7 +312,7 @@ body .codedemo::after {
   border-style:solid;
   border-color:#fff transparent;
     /* reduce the damage in FF3.0 */
-    display:block; 
+    display:block;
     width:0;
 }
 .kalei-styleguide-menu-link:hover:before,
@@ -325,7 +325,7 @@ body .codedemo::after {
   border-style:solid;
   border-color:#fff transparent;
     /* reduce the damage in FF3.0 */
-    display:block; 
+    display:block;
     width:0;
 }
 
@@ -348,15 +348,15 @@ body .codedemo::after {
   border-color:transparent #f7f7f7;
 }
 
-.sheet-submenu li.active {
+.kalei-sheet-submenu li.active {
   background: #ebebeb;
 }
 
-.sheet-submenu ul {
+.kalei-sheet-submenu ul {
   margin: 0;
   padding: 0;
 }
-.sheet-submenu li {
+.kalei-sheet-submenu li {
   padding: 10px 10px 10px 40px;
   cursor: pointer;
   font-size: 14px;

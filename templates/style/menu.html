@@ -1,15 +1,10 @@
+<a class="kalei-styleguide-menu-heading" href="#"><%= menuTitle %></a>
 <div class="menu-items">
-	<a class="kalei-styleguide-menu-heading" href="#"><%= menuTitle %></a>
-
-		<!--<h3 class="kalei-styleguide-menu-stylesheets">Stylesheets</h3>
--->
 	<ul class="kalei-styleguide-menu">
-		<li data-sheet="<%= entry %>"><a class="kalei-styleguide-menu-link js-kalei-home" href="#" ><%= entry %>
-				</a>
-	<div class="sheet-submenu">
-					</div>
+		<li data-sheet="<%= entry %>">
+            <a class="kalei-styleguide-menu-link js-kalei-home" href="#" ><%= entry %></a>
+           <div class="kalei-sheet-submenu"></div>
 		</li>
-
 	<% _.each(menus, function (menu) { %>
 		<li>
 			<%= menu.category %>
@@ -18,7 +13,7 @@
 				<% _.each(menu.sheets, function (sheet) { %>
 
 				<li data-sheet="<%= sheet %>"><a class="kalei-styleguide-menu-link" href="#/style/<%= sheet %>"><%= sheet %></a>
-					<div class="sheet-submenu">
+					<div class="kalei-sheet-submenu">
 					</div>
 
 				</li>
@@ -28,6 +23,56 @@
 	<% }); %>
 	<div style="clear: both;"></div>
 </div>
-<div class="menu-expand">
 
-</div>
+<style type="text/css" media="screen">
+    .menu-items {
+        position: absolute;
+        top: 75px;
+        left: 0;
+        bottom: 0 !important;
+    }
+    .kalei-styleguide-menu-heading {
+        height: 75px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    .kalei {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+<!--
+
+BODY
+{
+    margin: 0;
+    padding: 0;
+}
+#content
+{
+    border: 3px solid #971111;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #DDD;
+    padding-top: 85px;
+}
+#header
+{
+    border: 2px solid #279895;
+    background-color: #FFF;
+    height: 75px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+-->
