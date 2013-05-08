@@ -14,6 +14,10 @@ function($, _, Backbone, dashboardPageTemplate, jscssp, config, marked) {
             var that = this;
             that.$el.html('Loading styles');
 
+            if(config.css_paths) {
+              config.css_path = config.css_paths[0]
+            }
+
             require(['text!' + config.css_path], function (styles) {
                 var masterStyle = config.css_path.substr(config.css_path.lastIndexOf('/')+1);
                 var markedOpts = _.extend({ sanitize: false, gfm: true }, config.marked_options || {});
@@ -57,6 +61,12 @@ function($, _, Backbone, dashboardPageTemplate, jscssp, config, marked) {
                         currentMenu.sheets.push(sheet);
                     }
                 });
+
+                if(config.css_paths) {
+                  for(var i = 1; i < config.css_paths.length; i++) {
+                    currentMenu.sheets.push(config.css_paths[i])
+                  }
+                }
                 menus.push(currentMenu);
 
                 $(that.el).html(_.template(dashboardPageTemplate, {_:_, menuTitle: menuTitle, menus: menus, entry: masterStyle}));
