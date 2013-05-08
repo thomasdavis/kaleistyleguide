@@ -215,7 +215,7 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hl
                           text: '<div class="codedemo">' + comment.text + '<div style="clear: both;"></div></div>'
                         });
                         //Push the code section so marked can parse it as a <pre><code> block
-                        comment.text = comment.text.replace(/class='fixie'|class="fixie"| fixie|fixie /g, "")
+                        comment.text = comment.text.replace(/class=([""'])fixie\1|(?![""' ])fixie(?=[""' ])/g, "")
                         block.content.push(comment);
                         break;
                     case "heading":
