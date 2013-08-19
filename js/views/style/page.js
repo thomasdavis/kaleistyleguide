@@ -9,15 +9,22 @@ define([
 'pagedown',
 'libs/highlight/highlight',
 'libs/parseuri/parseuri',
-'libs/waypoints/waypoints',
 'libs/less/less-1.3.3.min'
 ],
-function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hljs, parseuri, waypoints){
+function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hljs, parseuri){
     var that = null;
     var StylePage = Backbone.View.extend({
         el: '.kalei-style-page',
         render: function () {
             that = this;
+
+            //add more space at the bottom of the page to avoid scrolling to last node from menu
+            //but we can think for something more smarter
+            var pageHeight = document.body.offsetHeight;
+            var lastEl = $(".kalei-documentation:last").height();
+            console.log(lastEl);
+            $(that.el).css({ 'padding-bottom' : pageHeight });
+
 
             $('a.kalei-styleguide-menu-link').removeClass('active');
             if(window.location.hash === '') {
@@ -107,22 +114,41 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hl
                 //Colour Coding in code Block
                 $(' code').each(function(i, e) {hljs.highlightBlock(e); });
 
-
-                $('.kalei-comments-container > .kalei-comments > h2, .kalei-comments-container > .kalei-comments  > h1').waypoint(function(ev) {
-                    $('.kalei-sheet-submenu li').removeClass('active');
-                    $('.kalei-sheet-submenu li:contains('+$(ev.currentTarget).text()+')').addClass('active');
-                }, {
-                    offset: 20  // middle of the page
-                });
-
+                //Fixed by pivanov
+                //that.compute_css
                 $(".kalei-sheet-submenu li").on('click', function(ev) {
                     $('html, body').animate({
-                        scrollTop: $(".kalei-comments h2:contains('"+$(ev.currentTarget).text()+"'),.kalei-comments h1:contains('"+$(ev.currentTarget).text()+"')").offset().top - 20
-                    }, 200);
+                        scrollTop: $(".kalei-comments h1:contains('"+$(ev.currentTarget).text()+"'), .kalei-comments h2:contains('"+$(ev.currentTarget).text()+"')").offset().top - 40
+                    }, 400);
+                });
+
+                $(window).scroll(function () {
+                    $(".kalei-documentation").each(function(){
+                        if ( that.is_on_screen($(this), 40) ) {
+                            $(".kalei-sheet-submenu li").removeClass('active');
+                            $(".kalei-sheet-submenu li:contains('" + $(this).find('.kalei-comments > h1').text() +"'), .kalei-sheet-submenu li:contains('" + $(this).find('.kalei-comments > h2').text() +"')").addClass('active');
+                        }
+                    });
                 });
 
                 fixie.init();
             });
+        },
+
+        is_on_screen: function(el, offset) {
+
+            var win = $(window);
+
+            var viewport = {
+                top : win.scrollTop()
+            };
+
+            viewport.bottom = viewport.top + win.height();
+
+            var bounds = el.offset();
+
+            return (!(viewport.top + offset < bounds.top || viewport.top > bounds.bottom));
+
         },
 
         compute_css: function(stylesheet) {
