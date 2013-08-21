@@ -25,7 +25,7 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hl
             console.log(lastEl);
             $(that.el).css({ 'padding-bottom' : pageHeight });
 
-
+            $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
             $('a.kalei-styleguide-menu-link').removeClass('active');
             if(window.location.hash === '') {
                 $('.js-kalei-home').addClass('active');
