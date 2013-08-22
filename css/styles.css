@@ -10,6 +10,18 @@ This website is a live example generated from Kalei's style.css
 
 <iframe src="http://ghbtns.com//github-btn.html?user=thomasdavis&repo=kaleistyleguide&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
 
+<div style="clear:both; height: 20px;"></div>
+
+<object width="640" height="390">
+  <param name="movie"
+         value="https://www.youtube.com/v/1hOaGs6YyQI?version=3&autoplay=0"></param>
+  <param name="allowScriptAccess" value="always"></param>
+  <embed src="https://www.youtube.com/v/1hOaGs6YyQI?version=3&autoplay=0"
+         type="application/x-shockwave-flash"
+         allowscriptaccess="always"
+         width="640" height="390"></embed>
+</object>
+
 ## Getting started
 
 1. Download the repository (`git clone git://github.com/thomasdavis/kaleistyleguide.git`)
