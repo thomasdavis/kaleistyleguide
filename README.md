@@ -26,8 +26,12 @@ This project aims at making sure your style sheets are fully documented whilst b
 ## Author
 
 [Thomas Davis](http://thomasdavis.github.com)
+
+## Contributors
+
 Luke Brooker
-Richard Barret
+[Richard Barret](http://richardbarrett.github.io)
+[Sam Pospischil](http://pospi.spadgos.com)
 
 
 
@@ -50,6 +54,7 @@ Kalei is heavily influenced by the following projects and blog posts.
 
 * [marked](https://github.com/chjj/marked)
 * [jscssp](http://www.glazman.org/JSCSSP/)
+* [LESS](http://lesscss.org/)
 * cssbeautify
 * [fixie](http://fixiejs.com/)
 * [highlight](http://softwaremaniacs.org/soft/highlight/en/)
