@@ -6,30 +6,17 @@ This project aims at making sure your style sheets are fully documented whilst b
 
 This website is a live example generated from Kalei's style.css
 
-<iframe src="http://ghbtns.com//github-btn.html?user=thomasdavis&repo=kaleistyleguide&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
+<iframe src="http://ghbtns.com//github-btn.html?user=kaleistyleguide&repo=kaleistyleguide&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
 
-<iframe src="http://ghbtns.com//github-btn.html?user=thomasdavis&repo=kaleistyleguide&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
-
-<div style="clear:both; height: 20px;"></div>
-
-<object width="640" height="390">
-  <param name="movie"
-         value="https://www.youtube.com/v/1hOaGs6YyQI?version=3&autoplay=0"></param>
-  <param name="allowScriptAccess" value="always"></param>
-  <embed src="https://www.youtube.com/v/1hOaGs6YyQI?version=3&autoplay=0"
-         type="application/x-shockwave-flash"
-         allowscriptaccess="always"
-         width="640" height="390"></embed>
-</object>
+<iframe src="http://ghbtns.com//github-btn.html?user=kaleistyleguide&repo=kaleistyleguide&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
 
 ## Getting started
 
-1. Download the repository (`git clone git://github.com/thomasdavis/kaleistyleguide.git`)
+1. Download the repository (`git clone git://github.com/kaleistyleguide/kaleistyleguide.git`)
 2. Serve it on a HTTP server and it should work!
 3. Edit `js/config.js` to point at your own `styles.css`
 
-
-**Rails Gem**
+### Rails Gem
 
 Install quickly and easily with the [rails gem](https://github.com/andrewhavens/kalei-ruby-gem)
 
@@ -69,10 +56,9 @@ Easily show off examples of your components and the HTML to generate them
 
 [Thomas Davis](http://thomasdavis.github.com)
 
-## Contributors
+Luke Brooker
 
-[Luke Brooker](http://lukebrooker.com/)
-
+Richard Barret
 
 <a style="" href="https://twitter.com/neutralthoughts" class="twitter-follow-button">Follow @neutralthoughts</a>
 <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
@@ -108,17 +94,17 @@ Kalei is heavily influenced by the following projects and blog posts.
 
 Public domain: http://unlicense.org/
 
+## Stylesheets
+
 */
 
-/* ### Kalei theme ### */
-@import url("theme.css");
-
-
-
-
-/* ### Examples ### */
-@import url("buttons.css");
-@import url("fixie-demo.css");
 
 /* ### Third Party ### */
-@import url("highlight/styles/googlecode.css");
+
+@import url("test.less");
+
+
+#main {
+    min-height: 100px;
+}
+

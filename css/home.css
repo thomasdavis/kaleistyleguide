@@ -1,0 +1,213 @@
+/*
+## Home page styles
+
+
+Main tagline
+
+```
+<div class="slide">
+<span class="heading">GREAT APPS START WITH GREAT APIs</span>
+</div>
+```
+Tagline description
+
+```
+<div class="slide">
+<span class="tag">Turbo-charge your APIs with our secure & collaborative API document builder and distribution platform</span>
+</div>
+```
+
+## Social network bar
+
+```
+<div class="background red"></div>
+<div class="background grey">
+    <div class="social-networks-container">
+        <div class="social-networks">
+            <span>OUR SOCIAL CONNECTIONS</span>
+          <span class="social-icon facebook"></span>
+          <span class="social-icon twitter"></span>
+          <span class="social-icon rss"></span>
+          <span class="social-icon google"></span>
+        </div>
+    </div>
+</div>
+
+<div class="background dark-grey"></div>
+
+```
+
+*/
+
+.prompts-copy{
+    font-family: 'Nexa';
+    color: #eee;
+    font-size: 18px;
+    padding: 0 10px;
+}
+.slides-container {
+  width: 1040px;
+  margin: auto;
+  padding-top: 24px;
+  height: 315px;
+  overflow: hidden;
+}
+.slide {
+  position: relative;
+}
+#swiffycontainer, #swiffycontainer2 , #swiffycontainer3{
+  position: absolute;
+  right: -500px;
+}
+.slide .heading-container {
+  position: absolute;
+  margin-left: 40px;
+  top: -150px;
+}
+.slide .heading-container .heading {
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+.slide .tag {
+  position: absolute;
+  bottom: 600px;
+  width: 515px;
+  margin-left: 40px;
+}
+
+
+.social-networks-container {
+    text-align: center;
+    padding: 15px 0;
+}
+.social-networks {
+    display: inline-block;
+    padding: 0;
+}
+.social-networks span {
+    color: #EEE;
+    font-family: 'Nexa';
+    font-size: 18px;
+    display: inline-block;
+    height: 48px;
+    float: left;
+    line-height: 52px;
+    margin-right: 30px;
+}
+.social-networks .social-icon {
+    margin-right: 30px;
+}
+.slide .heading {
+    font-family: 'Nexa Bold';
+    font-size: 30px;
+    background: #ea2452;
+    display: inline-block;
+    color: #fff;
+    padding: 10px;
+    line-height: 25px;
+}
+.slide .tag {
+    color: #333332;
+    font-family:  'Nexa';
+    font-size: 24px;
+    display: inline-block;
+}
+.our-apis-desc {
+    width: 710px;
+    float: left;
+    color: #fff;
+    font-family:  'Nexa';
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    display: inline-block;
+
+}
+.our-apis-desc a {
+    color: #FED563;
+}
+.our-apis-desc a:hover {
+    color:#171717;
+}
+.tagline {
+  display: block;
+  text-align: center;
+}
+
+.home-slider {
+  margin: auto;
+  width: 60px;
+}
+.signup-bar-container {
+    text-align: center;
+    padding:20px 0;
+}
+.signup-bar {
+    display: inline-block;
+}
+.signup-bar .one-hundred-percent {
+  color: #fff;
+  margin-left: 10px;
+  margin-right: 10px;
+  top: 5px;
+    position: relative;
+}
+.home-heading {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  margin: 0;
+  text-align: center;
+  color: #FFF;
+  font-size: 30px;
+}
+
+.home-heading, .red-panel{
+    color: #fff;
+    letter-spacing: 2px;
+}
+.feature-box {
+  float: left;
+  width: 290px;
+  margin-right: 77px;
+  color: #fed563;
+    font-size: 20px;
+  text-align: left;
+}
+.feature-box.last {
+    margin-right: 0;
+}
+p.feature-description {
+line-height: 24px;
+color: white;
+font-size: 18px;
+font-family: 'Nexa';
+margin: auto;
+padding-bottom: 80px;
+}
+
+.blue-panel-feature-headings{
+    margin: 30px 0 15px 0;
+    text-align: center;
+}
+.one-hundred-percent{
+    background: url('../img/backgrounds/100-percent-free.png');
+    width:165px;
+    height:23px;
+    display:inline-block;
+}
+
+.feature-1 {
+  background: url('../img/hp-feature-1.png');
+  width: 222px;
+  height: 222px;
+}
+.feature-2 {
+  background: url('../img/hp-feature-2.png');
+  width: 222px;
+  height: 222px;
+}
+.feature-3 {
+  background: url('../img/hp-feature-3.png');
+  width: 222px;
+  height: 222px;
+}
