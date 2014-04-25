@@ -7,6 +7,7 @@ require.config({
     underscore: 'libs/underscore/underscore-min', // https://github.com/amdjs
     backbone: 'libs/backbone/backbone-min', // https://github.com/amdjs
     less: 'libs/less/less-1.3.3',
+    jscssp: 'libs/jscssp/jscssp',
     fixie: 'libs/fixie/fixie',
 	pagedown: 'libs/pagedown/converter',
 
