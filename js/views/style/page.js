@@ -6,13 +6,19 @@ define([
 'text!templates/style/page.html',
 'config',
 'jscssp',
+'less',
 'pagedown',
 'libs/highlight/highlight',
-'libs/parseuri/parseuri',
-'libs/less/less-1.3.3.min'
+'libs/parseuri/parseuri'
 ],
-function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hljs, parseuri){
+function($, _, Backbone, marked, stylePageTemplate, config, jscssp, less, Pagedown, hljs, parseuri){
     var that = null;
+
+    	// This is important for some preprocessors to operate efficiently and correctly.
+    	// They should cascade and compute aggregate styles for all imported rules internally,
+    	// and following this there will be no need to update the style block assigned to the page.
+    	firstRun = true;
+
     var StylePage = Backbone.View.extend({
         el: '.kalei-style-page',
         render: function () {
@@ -24,21 +30,6 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hl
             var lastEl = $(".kalei-documentation:last").height();
             console.log(lastEl);
             $(that.el).css({ 'padding-bottom' : pageHeight });
-
-            $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
-            $('a.kalei-styleguide-menu-link').removeClass('active');
-            if(window.location.hash === '') {
-                $('.js-kalei-home').addClass('active');
-            } else {
-                $('[href="' + window.location.hash + '"]').addClass('active');
-            }
-
-            // $("head").find("link").attr("href", function (i, value) {
-            //     if (value != config.css_path){
-            //         $('head').append('<link rel="stylesheet" href="' + config.css_path + '"" type="text/css" />');
-            //     }
-            // });
-
 
             var styleUrl;
             var configDir;
@@ -59,80 +50,101 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hl
 
             console.log('try', configDir);
             console.log('try', styleUrl);
-            require(['text!'+ styleUrl], function (stylesheet) {
-                var parser = null;
-                var regex = /(?:.*\/)(.*)\.(css|less|sass)$/gi;
-                var result = regex.exec(styleUrl);
-                //result[0] Original Input
-                //result[1] Filename
-                //result[2] Extension
 
+            var parser = null,
+            	page = {blocks:[]};
 
-                var page = {blocks:[]};
+            switch (config.css_processor) {
+                case 'jscssp':
+                	// insert into page and process the 'real' CSS on first parse
+                	if (firstRun) {
+	                	$('head').append('<link rel="stylesheet" href="' + config.css_path + '" type="text/css" />');
+	                }
 
-                switch (result[2]) {
-                    case 'css':
-                            parser = new jscssp();
-                            stylesheet = parser.parse(stylesheet, false, true);
-                            page = that.compute_css(stylesheet);
-                        break;
-                    case 'less':
-                            parser = new(less.Parser)({
-                                paths: [configDir + '/'], // Specify search paths for @import directives
-                            });
-                            parser.parse(stylesheet, function (err, tree) {
-                                stylesheet = tree;
-                            });
-                            page = that.compute_less(stylesheet);
-                        break;
-                    case 'sass':
-                        console.log("Error", "Unsupported style type.");
-                        /*require(['sass'], function (sass){
-                            //parse
-                        });*/
-                        break;
+                	// parse this file
+		            require(['text!'+ styleUrl], function (stylesheet) {
+	                    parser = new jscssp();
+	                    stylesheet = parser.parse(stylesheet, false, true);
+
+	                    page = that.compute_css(stylesheet);
+			            that.render_page(page);
+		            });
+                	break;
+	            case 'less':
+                    parser = new(less.Parser)({
+						rootpath: configDir + '/',
+                        paths: [configDir + '/'], // Specify search paths for @import directives
+                    });
+
+                	// insert into page and process the 'real' CSS on first parse
+                	if (firstRun) {
+                		require(['text!'+ config.css_path], function (stylesheet) {
+		                    parser.parse('.codedemo {' + stylesheet + '}', function (err, tree) {
+		                    	$('head').append('<style type="text/css">' + tree.toCSS() + '</style>');
+		                    });
+		                });
+	                }
+
+                    require(['text!'+ styleUrl], function (stylesheet) {
+	                    parser.parse(stylesheet, function (err, tree) {
+
+		                    page = that.compute_less(tree);
+		                    that.render_page(page);
+	                    });
+	                });
+	                break;
+            }
+
+            $('a.kalei-styleguide-menu-link').removeClass('active');
+            if(window.location.hash === '') {
+                $('.js-kalei-home').addClass('active');
+            } else {
+                $('[href="' + window.location.hash + '"]').addClass('active');
+            }
+        },
+
+        render_page: function(page) {
+
+            console.log((new Date()).getTime() + " bottom", page)
+
+            $('.kalei-sheet-submenu').slideUp(200);
+            var submenu = $('<ul>');
+
+            ////////////NEEDS TO BE EXPORTED TO Menu.js
+            _.each(page.blocks, function (block) {
+                if (block.heading != "") {
+                    submenu.append($('<li>').text(block.heading));
                 }
+            });
+            $('li:first-child', submenu).addClass('active');
+            $('.kalei-sheet-submenu', $('[data-sheet="' + that.options.style + '"]')).html(submenu).slideDown(200);
+            ////////////NEEDS TO BE EXPORTED TO Menu.js
 
-                console.log((new Date()).getTime() + " bottom", page)
+            $(that.el).html(_.template(stylePageTemplate, {_:_, page: page, config: config}));
 
+            //Colour Coding in code Block
+            $(' code').each(function(i, e) {hljs.highlightBlock(e); });
 
-                $('.kalei-sheet-submenu').slideUp(200);
-                var submenu = $('<ul>');
+            //Fixed by pivanov
+            //that.compute_css
+            $(".kalei-sheet-submenu li").on('click', function(ev) {
+                $('html, body').animate({
+                    scrollTop: $(".kalei-comments h1:contains('"+$(ev.currentTarget).text()+"'), .kalei-comments h2:contains('"+$(ev.currentTarget).text()+"')").offset().top - 40
+                }, 400);
+            });
 
-                ////////////NEEDS TO BE EXPORTED TO Menu.js
-                _.each(page.blocks, function (block) {
-                    if (block.heading != "") {
-                        submenu.append($('<li>').text(block.heading));
+            $(window).scroll(function () {
+                $(".kalei-documentation").each(function(){
+                    if ( that.is_on_screen($(this), 40) ) {
+                        $(".kalei-sheet-submenu li").removeClass('active');
+                        $(".kalei-sheet-submenu li:contains('" + $(this).find('.kalei-comments > h1').text() +"'), .kalei-sheet-submenu li:contains('" + $(this).find('.kalei-comments > h2').text() +"')").addClass('active');
                     }
                 });
-                $('li:first-child', submenu).addClass('active');
-                $('.kalei-sheet-submenu', $('[data-sheet="' + that.options.style + '"]')).html(submenu).slideDown(200);
-                ////////////NEEDS TO BE EXPORTED TO Menu.js
-
-                $(that.el).html(_.template(stylePageTemplate, {_:_, page: page, config: config}));
-
-                //Colour Coding in code Block
-                $(' code').each(function(i, e) {hljs.highlightBlock(e); });
-
-                //Fixed by pivanov
-                //that.compute_css
-                $(".kalei-sheet-submenu li").on('click', function(ev) {
-                    $('html, body').animate({
-                        scrollTop: $(".kalei-comments h1:contains('"+$(ev.currentTarget).text()+"'), .kalei-comments h2:contains('"+$(ev.currentTarget).text()+"')").offset().top - 40
-                    }, 400);
-                });
-
-                $(window).scroll(function () {
-                    $(".kalei-documentation").each(function(){
-                        if ( that.is_on_screen($(this), 40) ) {
-                            $(".kalei-sheet-submenu li").removeClass('active');
-                            $(".kalei-sheet-submenu li:contains('" + $(this).find('.kalei-comments > h1').text() +"'), .kalei-sheet-submenu li:contains('" + $(this).find('.kalei-comments > h2').text() +"')").addClass('active');
-                        }
-                    });
-                });
-
-                fixie.init();
             });
+
+            fixie.init();
+
+            firstRun = false;
         },
 
         is_on_screen: function(el, offset) {
@@ -151,11 +163,11 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hl
 
         },
 
+        // process jscssp output into internal structure
         compute_css: function(stylesheet) {
-            console.log("compute_css()")
+            console.log("compute_css()", stylesheet)
             var page = {
                 blocks:[],
-                css:"",
                 stylesheets: []
             };
             console.log(stylesheet)
@@ -173,24 +185,14 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hl
                 }
             });
 
-            page.css = stylesheet.cssText()
-
-            var parser = new(less.Parser);
-            var stylesheet
-            page.css = ".kalei-style-page{" + page.css + "}"
-            parser.parse(page.css, function (err, tree) {
-                stylesheet = tree;
-            });
-
-            page.css = stylesheet.toCSS({ compress: true });
             return page;
         },
 
+        // process less output into internal structure
         compute_less: function(stylesheet) {
             console.log("compute_less()", stylesheet)
             var page = {
                 blocks:[],
-                css:"",
                 stylesheets: []
             };
 
@@ -210,10 +212,6 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, Pagedown, hl
                 }
             });
 
-
-            page.css = stylesheet.toCSS({ compress: true });
-            page.css = ".kalei-style-page{" + page.css + "}";
-            page.css = stylesheet.toCSS({ compress: true });
             return page;
         },
 
