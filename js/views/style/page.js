@@ -31,11 +31,10 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, less, Pagedo
             console.log(lastEl);
             $(that.el).css({ 'padding-bottom' : pageHeight });
 
-            var styleUrl;
-            var configDir;
+            var styleUrl, configDir, primaryStyleFile = config.css_path;
 
             if(this.options.style === null) {
-                this.options.style = config.css_path.substr(config.css_path.lastIndexOf('/')+1);
+                this.options.style = primaryStyleFile.substr(config.css_path.lastIndexOf('/')+1);
             }
 
             if(this.options.style.substr(0,1) === '/') {
@@ -72,7 +71,7 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, less, Pagedo
                 	break;
 	            case 'less':
                     parser = new(less.Parser)({
-                        filename: styleUrl,
+                        filename: primaryStyleFile,
                         rootpath: configDir + '/',
                         relativeUrls: true,
                         insecure: true,
