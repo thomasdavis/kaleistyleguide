@@ -200,7 +200,7 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, less, Pagedo
             };
 
             _.each(stylesheet.rules, function(rule) {
-                if (rule.silent != null){ //Comment block
+                if (rule.silent === false){ //Comment block
                     page.blocks = page.blocks.concat(that.parse_commentblock(rule.value))
                     //page.blocks.push();
                 } else if (rule.rules != null) { //Standard Rule
