@@ -1,5 +1,5 @@
 /*!
- * LESS - Leaner CSS v1.7.0
+ * Less - Leaner CSS v1.7.3
  * http://lesscss.org
  *
  * Copyright (c) 2009-2014, Alexis Sellier <self@cloudhead.net>
@@ -712,7 +712,7 @@ less.Parser = function Parser(env) {
         //
         //   Ruleset ->  Rule -> Value -> Expression -> Entity
         //
-        // Here's some LESS code:
+        // Here's some Less code:
         //
         //    .class {
         //      color: #fff;
@@ -987,6 +987,11 @@ less.Parser = function Parser(env) {
                     var rgb;
 
                     if (input.charAt(i) === '#' && (rgb = $re(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/))) {
+                        var colorCandidateString = rgb.input.match(/^#([\w]+).*/); // strip colons, brackets, whitespaces and other characters that should not definitely be part of color string
+                        colorCandidateString = colorCandidateString[1];
+                        if (!colorCandidateString.match(/^[A-Fa-f0-9]+$/)) { // verify if candidate consists only of allowed HEX characters
+                            error("Invalid HEX color code");
+                        }
                         return new(tree.Color)(rgb[1]);
                     }
                 },
@@ -1908,13 +1913,17 @@ less.Parser = function Parser(env) {
                         if (peek(/^\/[*\/]/)) {
                             break;
                         }
+
+                        save();
+
                         op = $char('/') || $char('*');
 
-                        if (!op) { break; }
+                        if (!op) { forget(); break; }
 
                         a = this.operand();
 
-                        if (!a) { break; }
+                        if (!a) { restore(); break; }
+                        forget();
 
                         m.parensInOp = true;
                         a.parensInOp = true;
@@ -2159,22 +2168,22 @@ tree.functions = {
     },
 
     hue: function (color) {
-        return new(tree.Dimension)(Math.round(color.toHSL().h));
+        return new(tree.Dimension)(color.toHSL().h);
     },
     saturation: function (color) {
-        return new(tree.Dimension)(Math.round(color.toHSL().s * 100), '%');
+        return new(tree.Dimension)(color.toHSL().s * 100, '%');
     },
     lightness: function (color) {
-        return new(tree.Dimension)(Math.round(color.toHSL().l * 100), '%');
+        return new(tree.Dimension)(color.toHSL().l * 100, '%');
     },
     hsvhue: function(color) {
-        return new(tree.Dimension)(Math.round(color.toHSV().h));
+        return new(tree.Dimension)(color.toHSV().h);
     },
     hsvsaturation: function (color) {
-        return new(tree.Dimension)(Math.round(color.toHSV().s * 100), '%');
+        return new(tree.Dimension)(color.toHSV().s * 100, '%');
     },
     hsvvalue: function (color) {
-        return new(tree.Dimension)(Math.round(color.toHSV().v * 100), '%');
+        return new(tree.Dimension)(color.toHSV().v * 100, '%');
     },
     red: function (color) {
         return new(tree.Dimension)(color.rgb[0]);
@@ -2189,7 +2198,7 @@ tree.functions = {
         return new(tree.Dimension)(color.toHSL().a);
     },
     luma: function (color) {
-        return new(tree.Dimension)(Math.round(color.luma() * color.alpha * 100), '%');
+        return new(tree.Dimension)(color.luma() * color.alpha * 100, '%');
     },
     luminance: function (color) {
         var luminance =
@@ -2197,7 +2206,7 @@ tree.functions = {
           + (0.7152 * color.rgb[1] / 255)
           + (0.0722 * color.rgb[2] / 255);
 
-        return new(tree.Dimension)(Math.round(luminance * color.alpha * 100), '%');
+        return new(tree.Dimension)(luminance * color.alpha * 100, '%');
     },
     saturate: function (color, amount) {
         // filter: saturate(3.2);
@@ -2317,7 +2326,7 @@ tree.functions = {
         }
     },
     e: function (str) {
-        return new(tree.Anonymous)(str instanceof tree.JavaScript ? str.evaluated : str);
+        return new(tree.Anonymous)(str instanceof tree.JavaScript ? str.evaluated : str.value);
     },
     escape: function (str) {
         return new(tree.Anonymous)(encodeURI(str.value).replace(/=/g, "%3D").replace(/:/g, "%3A").replace(/#/g, "%23").replace(/;/g, "%3B").replace(/\(/g, "%28").replace(/\)/g, "%29"));
@@ -2510,7 +2519,7 @@ tree.functions = {
         var mimetype = mimetypeNode.value;
         var filePath = (filePathNode && filePathNode.value);
 
-        var fs = require('fs'),
+        var fs = require('./fs'),
             path = require('path'),
             useBase64 = false;
 
@@ -2845,13 +2854,9 @@ function clamp(val) {
 }
 
 tree.fround = function(env, value) {
-    var p;
-    if (env && (env.numPrecision != null)) {
-        p = Math.pow(10, env.numPrecision);
-        return Math.round(value * p) / p;
-    } else {
-        return value;
-    }
+    var p = env && env.numPrecision;
+    //add "epsilon" to ensure numbers like 1.000000005 (represented as 1.000000004999....) are properly rounded...
+    return (p == null) ? value : Number((value + 2e-16).toFixed(p));
 };
 
 tree.functionCall = function(env, currentFileInfo) {
@@ -3060,9 +3065,9 @@ tree.find = function (obj, fun) {
 
 tree.jsify = function (obj) {
     if (Array.isArray(obj.value) && (obj.value.length > 1)) {
-        return '[' + obj.value.map(function (v) { return v.toCSS(false); }).join(', ') + ']';
+        return '[' + obj.value.map(function (v) { return v.toCSS(); }).join(', ') + ']';
     } else {
-        return obj.toCSS(false);
+        return obj.toCSS();
     }
 };
 
@@ -3145,8 +3150,8 @@ tree.Alpha.prototype = {
 
 (function (tree) {
 
-tree.Anonymous = function (string, index, currentFileInfo, mapLines) {
-    this.value = string.value || string;
+tree.Anonymous = function (value, index, currentFileInfo, mapLines) {
+    this.value = value;
     this.index = index;
     this.mapLines = mapLines;
     this.currentFileInfo = currentFileInfo;
@@ -4573,7 +4578,7 @@ tree.mixin.Call.prototype = {
     eval: function (env) {
         var mixins, mixin, args, rules = [], match = false, i, m, f, isRecursive, isOneFound, rule,
             candidates = [], candidate, conditionResult = [], defaultFunc = tree.defaultFunc,
-            defaultResult, defNone = 0, defTrue = 1, defFalse = 2, count;
+            defaultResult, defNone = 0, defTrue = 1, defFalse = 2, count, originalRuleset;
 
         args = this.arguments && this.arguments.map(function (a) {
             return { name: a.name, value: a.value.eval(env) };
@@ -4651,8 +4656,9 @@ tree.mixin.Call.prototype = {
                         try {
                             mixin = candidates[m].mixin;
                             if (!(mixin instanceof tree.mixin.Definition)) {
+                                originalRuleset = mixin.originalRuleset || mixin;
                                 mixin = new tree.mixin.Definition("", [], mixin.rules, null, false);
-                                mixin.originalRuleset = mixins[m].originalRuleset || mixins[m];
+                                mixin.originalRuleset = originalRuleset;
                             }
                             Array.prototype.push.apply(
                                   rules, mixin.evalCall(env, args, this.important).rules);
@@ -4834,7 +4840,7 @@ tree.mixin.Definition.prototype = {
     matchCondition: function (args, env) {
         if (this.condition && !this.condition.eval(
             new(tree.evalEnv)(env,
-                [this.evalParams(env, new(tree.evalEnv)(env, this.frames.concat(env.frames)), args, [])] // the parameter variables
+                [this.evalParams(env, new(tree.evalEnv)(env, this.frames ? this.frames.concat(env.frames) : env.frames), args, [])] // the parameter variables
                     .concat(this.frames) // the parent namespace/mixin frames
                     .concat(env.frames)))) { // the current environment frames
             return false;
@@ -5009,8 +5015,16 @@ tree.Quoted.prototype = {
             return -1;
         }
 
-        var left = this.toCSS(),
+        var left, right;
+
+        // when comparing quoted strings allow the quote to differ
+        if (x.type === "Quoted" && !this.escaped && !x.escaped) {
+            left = x.value;
+            right = this.value;
+        } else {
+            left = this.toCSS();
             right = x.toCSS();
+        }
 
         if (left === right) {
             return 0;
@@ -6002,6 +6016,8 @@ tree.Variable.prototype = {
         if (!this.contents) { this.contents = {}; }
         if (!this.contentsIgnoredChars) { this.contentsIgnoredChars = {}; }
         if (!this.files) { this.files = {}; }
+
+        if (typeof this.paths === "string") { this.paths = [this.paths]; }
 
         if (!this.currentFileInfo) {
             var filename = (options && options.filename) || "input";
@@ -7220,7 +7236,7 @@ tree.Variable.prototype = {
             if (this._writeSourceMap) {
                 this._writeSourceMap(sourceMapContent);
             } else {
-                sourceMapURL = "data:application/json," + encodeURIComponent(sourceMapContent);
+                sourceMapURL = "data:application/json;base64," + require('./encoder.js').encodeBase64(sourceMapContent);
             }
 
             if (sourceMapURL) {
@@ -7353,13 +7369,7 @@ function createCSS(styles, sheet, lastModified) {
     }
     css.id = id;
 
-    if (css.styleSheet) { // IE
-        try {
-            css.styleSheet.cssText = styles;
-        } catch (e) {
-            throw new(Error)("Couldn't reassign styleSheet.cssText.");
-        }
-    } else {
+    if (!css.styleSheet) {
         css.appendChild(document.createTextNode(styles));
 
         // If new contents match contents of oldCss, don't replace oldCss
@@ -7381,6 +7391,17 @@ function createCSS(styles, sheet, lastModified) {
     }
     if (oldCss && keepOldCss === false) {
         oldCss.parentNode.removeChild(oldCss);
+    }
+
+    // For IE.
+    // This needs to happen *after* the style element is added to the DOM, otherwise IE 7 and 8 may crash.
+    // See http://social.msdn.microsoft.com/Forums/en-US/7e081b65-878a-4c22-8e68-c10d39c2ed32/internet-explorer-crashes-appending-style-element-to-head
+    if (css.styleSheet) {
+        try {
+            css.styleSheet.cssText = styles;
+        } catch (e) {
+            throw new(Error)("Couldn't reassign styleSheet.cssText.");
+        }
     }
 
     // Don't update the local store if the file wasn't modified
@@ -7646,7 +7667,7 @@ function pathDiff(url, baseUrl) {
 }
 
 function getXMLHttpRequest() {
-    if (window.XMLHttpRequest && (window.location.protocol !== "file:" || !window.ActiveXObject)) {
+    if (window.XMLHttpRequest && (window.location.protocol !== "file:" || !("ActiveXObject" in window))) {
         return new XMLHttpRequest();
     } else {
         try {

@@ -72,7 +72,10 @@ function($, _, Backbone, marked, stylePageTemplate, config, jscssp, less, Pagedo
                 	break;
 	            case 'less':
                     parser = new(less.Parser)({
-						rootpath: configDir + '/',
+                        filename: styleUrl,
+                        rootpath: configDir + '/',
+                        relativeUrls: true,
+                        insecure: true,
                         paths: [configDir + '/'], // Specify search paths for @import directives
                     });
 
