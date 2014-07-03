@@ -46,6 +46,12 @@
         left: 0;
     }
 </style>
+
+<% _.each(externalStyles, function (url) { %>
+    <link rel="stylesheet" type="text/css" href="<%= url %>" />
+<% }); %>
+
+
 <!--
 
 BODY

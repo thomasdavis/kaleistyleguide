@@ -50,8 +50,8 @@ function($, _, Backbone, dashboardPageTemplate, jscssp, less, config, marked) {
                   }
                 }
                 menus.push(currentMenu);
-    console.log(menus);
-                $(that.el).html(_.template(dashboardPageTemplate, {_:_, menuTitle: menuTitle, menus: menus, entry: masterStyle}));
+
+                $(that.el).html(_.template(dashboardPageTemplate, {_:_, menuTitle: menuTitle, menus: menus, entry: masterStyle, externalStyles: config.external_stylesheets}));
                 $('[href="' + window.location.hash + '"]').addClass('active');
                 if(window.location.hash === '') {
                     $('.js-kalei-home').addClass('active');

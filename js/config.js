@@ -17,7 +17,11 @@ define({
 	// You can optionally set configuration for marked.js
 	marked_options: {
 		tables: true
-	}
+	},
+
+	// Enter URLs of any external stylesheets you wish to include with this demo.
+	// These will not be parsed as part of the documentation and are simply loaded into the page header.
+	external_stylesheets: []
 
 	//disqus_shortname: 'kaleistyleguide'
 });
