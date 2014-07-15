@@ -45,7 +45,7 @@ Kalei is heavily influenced by the following projects and blog posts.
 
 [StyleDocco](http://jacobrask.github.com/styledocco/)
 
-[RJ Metrics](http://info.rjmetrics.com/blog/bid/52753/Our-Living-Style-Guide-Writing-maintainable-HTML-CSS)
+[RJ Metrics](http://blog.rjmetrics.com/2012/02/20/our-living-style-guide-writing-maintainable-htmlcss/)
 
 [Anchoring Your Design Language in a Live Style Guide](http://uxmag.com/articles/anchoring-your-design-language-in-a-live-style-guide)
 
