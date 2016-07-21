@@ -4401,7 +4401,7 @@ jscsspStylesheet.prototype = {
 
   deleteRule: function(aIndex) {
     try {
-      this.cssRules.splice(aIndex);
+      this.cssRules.splice(aIndex, 1);
     }
     catch(e) {
     }
