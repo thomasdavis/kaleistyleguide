@@ -62,14 +62,16 @@ export const parseCSS = (cssText, cssPath) => {
   const importStatements = extractImportStatements(cssText);
   
   importStatements.forEach(importPath => {
-    const sheetName = getFilenameFromPath(importPath);
+    // Ensure the import path is correctly formatted
+    const normalizedPath = normalizeImportPath(importPath, cssPath);
+    const sheetName = getFilenameFromPath(normalizedPath);
     const sheetId = sheetName.replace(/\s+/g, '-').toLowerCase();
     
     // Add to sheets list
     sheets.push({
       id: sheetId,
       name: sheetName,
-      path: importPath,
+      path: normalizedPath,
       category: currentCategory
     });
     
@@ -140,6 +142,23 @@ const extractImportStatements = (cssText) => {
   }
   
   return imports;
+};
+
+/**
+ * Normalize an import path to ensure it works with the public directory structure
+ * @param {string} importPath - The import path from CSS
+ * @param {string} basePath - The path of the CSS file containing the import
+ * @returns {string} - Normalized path
+ */
+const normalizeImportPath = (importPath, basePath) => {
+  // If the path is already absolute (starts with /), return it as is
+  if (importPath.startsWith('/')) {
+    return importPath;
+  }
+  
+  // If it's a relative path, resolve it relative to the base CSS file
+  const baseDir = basePath.substring(0, basePath.lastIndexOf('/') + 1);
+  return `${baseDir}${importPath}`;
 };
 
 /**

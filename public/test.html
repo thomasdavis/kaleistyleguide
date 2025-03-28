@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Static File Test</title>
+</head>
+<body>
+  <h1>Test Page for Static Files</h1>
+  <p>If you can see this page, Vite is serving static files correctly from the public directory.</p>
+  <script>
+    async function testCssAccess() {
+      try {
+        const response = await fetch('/css/styles.css');
+        if (response.ok) {
+          document.body.innerHTML += '<p style="color: green;">✓ Successfully accessed styles.css</p>';
+        } else {
+          document.body.innerHTML += `<p style="color: red;">✗ Failed to access styles.css: ${response.status} ${response.statusText}</p>`;
+        }
+      } catch (error) {
+        document.body.innerHTML += `<p style="color: red;">✗ Error accessing styles.css: ${error.message}</p>`;
+      }
+    }
+    
+    testCssAccess();
+  </script>
+</body>
+</html>

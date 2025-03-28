@@ -56,6 +56,7 @@ The current Kalei Styleguide has the following characteristics:
 - [ ] Implement unit tests
 - [ ] Add integration tests
 - [ ] Create user guides and examples
+- [ ] Create a Next.js example project
 
 ### Phase 5: Deployment & Distribution
 - [ ] Set up continuous integration/deployment
@@ -88,17 +89,46 @@ The current Kalei Styleguide has the following characteristics:
 5. **Accessibility**: WCAG 2.1 AA compliance
 6. **Dark Mode**: (To be implemented)
 
+## Next.js Example Project
+
+A critical addition to the modernized Kalei Styleguide will be a comprehensive Next.js example project that demonstrates how to integrate Kalei into a modern web application:
+
+1. **Example Structure**: A simple Next.js application with global CSS and component-specific styles
+2. **Integration Modes**:
+   - Standalone mode: Kalei running as a separate application analyzing the Next.js styles
+   - Embedded mode: Kalei integrated directly into the Next.js application as a route (e.g., `/styleguide`)
+3. **Dual Documentation**: The ability to document both global styles and component-specific styles
+4. **Live Component Rendering**: Capability to render actual Next.js components alongside their CSS documentation
+5. **Hot Reloading**: Changes to CSS documentation immediately reflect in the style guide
+
+This example will serve as both a demonstration and a template for users to understand how to integrate Kalei into their own Next.js projects.
+
+## Future Vision: Beyond CSS Comments
+
+While maintaining the core concept of using markdown in CSS comments for documentation, we envision expanding Kalei's capabilities to become a more comprehensive design system tool:
+
+1. **Design Token Integration**: Extract and document design tokens from CSS variables or theme configurations
+2. **Component API Documentation**: Combine CSS documentation with component props documentation
+3. **A11y Compliance Checking**: Analyze documented components for accessibility issues
+4. **Visual Regression Testing**: Compare rendered components against baselines to detect unintended visual changes
+5. **Interactive Playgrounds**: Allow users to modify component props and see live changes
+6. **Design System Management**: Track component usage and dependencies across the application
+7. **Mobile App**: Companion mobile app for viewing the style guide on mobile devices during development
+8. **Design Tool Integration**: Plugins for Figma, Sketch, etc., to sync design documentation with code documentation
+
 ## Success Metrics
 
 - **Performance**: 90+ Lighthouse score
 - **Accessibility**: WCAG 2.1 AA compliance
 - **Code Quality**: 90%+ test coverage
 - **User Satisfaction**: Improved navigation and discoverability
+- **Adoption**: Number of projects using Kalei for style guide generation
 
 ## Next Steps
 
 1. Complete the feature enhancements (search functionality, dark mode)
 2. Implement testing for the components
 3. Create comprehensive documentation
-4. Set up CI/CD pipeline
-5. Create distribution packages
+4. Develop the Next.js example project
+5. Set up CI/CD pipeline
+6. Create distribution packages

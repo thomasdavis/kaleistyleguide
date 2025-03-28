@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { parseCSS } from '../utils/cssParser';
+import config from '../config';
 
 export const useStylesheets = () => {
   const [stylesheets, setStylesheets] = useState([]);
@@ -12,16 +13,15 @@ export const useStylesheets = () => {
       try {
         setIsLoading(true);
         
-        // Get configuration
-        const configResponse = await fetch('/js/config.js');
-        const configText = await configResponse.text();
-        
-        // Extract CSS path from config
-        const cssPathMatch = configText.match(/css_path:\s*['"](.+?)['"]/);
-        const cssPath = cssPathMatch ? cssPathMatch[1] : '/css/styles.css';
+        // Get CSS path from our config file
+        const cssPath = config.css_path || '/css/styles.css';
         
         // Load main stylesheet
         const response = await fetch(cssPath);
+        if (!response.ok) {
+          throw new Error(`Failed to load stylesheet: ${response.statusText}`);
+        }
+        
         const cssText = await response.text();
         
         // Parse the CSS

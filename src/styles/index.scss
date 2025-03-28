@@ -1,5 +1,11 @@
 @use 'variables' as *;
 @use 'mixins' as *;
+@use './components/Layout';
+@use './components/Sidebar';
+@use './components/StyleBlock';
+@use './pages/HomePage';
+@use './pages/StyleGuidePage';
+@use './pages/NotFoundPage';
 
 /* 
 # Kalei Style Guide - Modern Version
@@ -162,13 +168,3 @@ pre {
   color: #e53e3e;
   border: 1px solid #f8d7da;
 }
-
-// Import component styles
-@use './components/Layout';
-@use './components/Sidebar';
-@use './components/StyleBlock';
-
-// Import page styles
-@use './pages/HomePage';
-@use './pages/StyleGuidePage';
-@use './pages/NotFoundPage';
