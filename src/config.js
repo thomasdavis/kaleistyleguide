@@ -5,7 +5,7 @@
 
 const config = {
   // CSS path is used as the primary stylesheet to parse
-  css_path: '/css/styles.css',
+  css_path: '/css/global.css',
   
   // You can manually list specific CSS files to process
   // css_paths: ['/css/styles.css', '/css/buttons.css'],

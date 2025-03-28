@@ -1,0 +1,326 @@
+/*
+# Kalei Next.js Example - Global Styles
+This is the global stylesheet for the Kalei Next.js example application.
+It demonstrates how to document your CSS with markdown comments for Kalei.
+
+## Colors
+We use a specific color palette throughout the application:
+
+- Primary: #0066ff
+- Secondary: #75eb33
+- Dark: #333333
+- Light: #f8f9fa
+
+## Typography
+We use a system font stack to ensure optimal performance.
+
+```html
+<p class="text-base">Base text style</p>
+<p class="text-lg">Large text style</p>
+<p class="text-xl">Extra large text style</p>
+```
+*/
+
+:root {
+  /* Color variables */
+  --color-primary: #0066ff;
+  --color-secondary: #75eb33;
+  --color-dark: #333333;
+  --color-light: #f8f9fa;
+  
+  /* Spacing variables */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 3rem;
+}
+
+/*
+## Reset
+A minimal reset to ensure consistent base styling.
+*/
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+}
+
+/*
+## Links
+Basic styling for links throughout the application.
+
+```html
+<a href="#" class="link">Standard link</a>
+<a href="#" class="link-primary">Primary link</a>
+```
+*/
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.link-primary {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/*
+## Typography
+Text styling classes.
+
+```html
+<h1 class="heading-1">Heading 1</h1>
+<p class="text-base">This is base text</p>
+<p class="text-lg">This is large text</p>
+<p class="text-xl">This is extra large text</p>
+```
+*/
+
+.heading-1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+}
+
+.heading-2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.heading-3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.text-base {
+  font-size: 1rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.text-lg {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.text-xl {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+/*
+## Layout
+Container classes for layout.
+
+```html
+<div class="container">
+  <div class="container-narrow">Narrow content here</div>
+</div>
+```
+*/
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 var(--spacing-md);
+  margin: 0 auto;
+}
+
+.container-narrow {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/*
+## Sections
+Section styling for page layout.
+
+```html
+<section class="section">
+  <h2 class="heading-2">Section title</h2>
+  <p class="text-base">Section content goes here.</p>
+</section>
+```
+*/
+
+.section {
+  padding: var(--spacing-xl) 0;
+}
+
+.section-alt {
+  background-color: rgba(0, 102, 255, 0.05);
+  padding: var(--spacing-xl) 0;
+}
+
+/*
+## Buttons
+Button styling for actions.
+
+```html
+<button class="btn">Default Button</button>
+<button class="btn btn-primary">Primary Button</button>
+<button class="btn btn-secondary">Secondary Button</button>
+<button class="btn btn-large">Large Button</button>
+```
+*/
+
+.btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-color: #fff;
+  color: var(--color-dark);
+  border: 1px solid #ddd;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0055d4;
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-dark);
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #65d12c;
+}
+
+.btn-large {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 1.1rem;
+}
+
+/*
+## Cards
+Card components for displaying content.
+
+```html
+<div class="card">
+  <div class="card-header">Card Title</div>
+  <div class="card-body">
+    <p>Card content goes here.</p>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-primary">Action</button>
+  </div>
+</div>
+```
+*/
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: var(--spacing-lg);
+}
+
+.card-header {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.card-body {
+  padding: var(--spacing-md);
+}
+
+.card-footer {
+  padding: var(--spacing-md);
+  border-top: 1px solid #eee;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/*
+## Grid
+Simple grid system.
+
+```html
+<div class="grid">
+  <div class="grid-item">Item 1</div>
+  <div class="grid-item">Item 2</div>
+  <div class="grid-item">Item 3</div>
+</div>
+```
+*/
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.grid-item {
+  background-color: #fff;
+  padding: var(--spacing-md);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-1 {
+  margin-bottom: var(--spacing-xs);
+}
+
+.mb-2 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.mb-3 {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-4 {
+  margin-bottom: var(--spacing-lg);
+}
+
+.mb-5 {
+  margin-bottom: var(--spacing-xl);
+}

@@ -1,0 +1,195 @@
+/*
+# Button Component
+A customizable button component with various styles and sizes.
+
+## Usage
+The Button component can be used in various contexts throughout the application.
+It supports different variants and sizes to accommodate different design needs.
+
+```html
+<button class="button button-primary">Primary Button</button>
+<button class="button button-secondary">Secondary Button</button>
+<button class="button button-outline">Outline Button</button>
+```
+*/
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: 0.375rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/*
+## Button Variants
+Different button styles for various contexts.
+
+### Primary
+Primary action buttons.
+
+```html
+<button class="button button-primary">Primary Button</button>
+<button class="button button-primary button-sm">Small Primary</button>
+<button class="button button-primary button-lg">Large Primary</button>
+```
+*/
+
+.button-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.button-primary:hover {
+  background-color: #0055d4;
+}
+
+.button-primary:focus {
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.3);
+  outline: none;
+}
+
+/*
+### Secondary
+Secondary action buttons.
+
+```html
+<button class="button button-secondary">Secondary Button</button>
+<button class="button button-secondary button-sm">Small Secondary</button>
+<button class="button button-secondary button-lg">Large Secondary</button>
+```
+*/
+
+.button-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-dark);
+}
+
+.button-secondary:hover {
+  background-color: #65d12c;
+}
+
+.button-secondary:focus {
+  box-shadow: 0 0 0 3px rgba(117, 235, 51, 0.3);
+  outline: none;
+}
+
+/*
+### Outline
+Buttons with outline styling.
+
+```html
+<button class="button button-outline">Outline Button</button>
+<button class="button button-outline button-sm">Small Outline</button>
+<button class="button button-outline button-lg">Large Outline</button>
+```
+*/
+
+.button-outline {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.button-outline:hover {
+  background-color: rgba(0, 102, 255, 0.05);
+}
+
+.button-outline:focus {
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.2);
+  outline: none;
+}
+
+/*
+## Button Sizes
+Different sizes for various contexts.
+
+```html
+<button class="button button-primary button-sm">Small Button</button>
+<button class="button button-primary">Default Size</button>
+<button class="button button-primary button-lg">Large Button</button>
+```
+*/
+
+.button-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+}
+
+.button-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  border-radius: 0.5rem;
+}
+
+/*
+## Button with Icon
+Buttons that include icons along with text.
+
+```html
+<button class="button button-primary button-with-icon">
+  <span class="button-icon">🔍</span>
+  <span>Search</span>
+</button>
+```
+*/
+
+.button-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+## Button States
+States for buttons such as loading and disabled.
+
+```html
+<button class="button button-primary button-loading">Loading...</button>
+<button class="button button-primary" disabled>Disabled Button</button>
+```
+*/
+
+.button-loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.button-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  margin: -0.5rem 0 0 -0.5rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: white;
+  animation: button-loading-spinner 0.6s linear infinite;
+}
+
+@keyframes button-loading-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.button[disabled] {
+  opacity: 0.65;
+  pointer-events: none;
+}

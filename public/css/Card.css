@@ -1,0 +1,201 @@
+/*
+# Card Component
+A versatile card component for displaying content in a contained format.
+
+## Usage
+Cards are used throughout the application to display content in a consistent and visually appealing way.
+
+```html
+<div class="card">
+  <div class="card-header">Card Title</div>
+  <div class="card-body">Card content goes here</div>
+  <div class="card-footer">Card footer</div>
+</div>
+```
+*/
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/*
+## Card Header
+Contains the title or main heading of the card.
+
+```html
+<div class="card-header">Card Title</div>
+<div class="card-header card-header-primary">Primary Header</div>
+<div class="card-header card-header-centered">Centered Header</div>
+```
+*/
+
+.card-header {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.card-header-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.card-header-centered {
+  justify-content: center;
+}
+
+/*
+## Card Body
+The main content area of the card.
+
+```html
+<div class="card-body">
+  <p>Card content goes here</p>
+</div>
+<div class="card-body card-body-padded">
+  <p>Card with extra padding</p>
+</div>
+```
+*/
+
+.card-body {
+  padding: 1rem;
+  flex: 1 1 auto;
+}
+
+.card-body-padded {
+  padding: 2rem;
+}
+
+/*
+## Card Footer
+Contains actions or secondary information at the bottom of the card.
+
+```html
+<div class="card-footer">
+  <button class="button button-primary">Action</button>
+</div>
+<div class="card-footer card-footer-centered">
+  <button class="button button-primary">Centered Action</button>
+</div>
+```
+*/
+
+.card-footer {
+  padding: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.02);
+  display: flex;
+  align-items: center;
+}
+
+.card-footer-centered {
+  justify-content: center;
+}
+
+/*
+## Card Variants
+Different styles of cards for various purposes.
+
+### Featured Card
+A card style that stands out more than standard cards.
+
+```html
+<div class="card card-featured">
+  <div class="card-header">Featured Card</div>
+  <div class="card-body">This card stands out from the rest.</div>
+  <div class="card-footer">
+    <button class="button button-primary">Action</button>
+  </div>
+</div>
+```
+*/
+
+.card-featured {
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 8px 16px rgba(0, 102, 255, 0.1);
+}
+
+/*
+### Horizontal Card
+A card that displays content in a horizontal layout rather than vertical.
+
+```html
+<div class="card card-horizontal">
+  <div class="card-media" style="background-image: url('/image.jpg')"></div>
+  <div class="card-content">
+    <div class="card-header">Horizontal Card</div>
+    <div class="card-body">Content alongside an image</div>
+    <div class="card-footer">
+      <button class="button button-primary">Action</button>
+    </div>
+  </div>
+</div>
+```
+*/
+
+.card-horizontal {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-media {
+  flex: 0 0 40%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*
+## Card with Image
+A card with an image at the top.
+
+```html
+<div class="card">
+  <div class="card-image">
+    <img src="/image.jpg" alt="Card image">
+  </div>
+  <div class="card-body">
+    <h3>Card with Image</h3>
+    <p>Card content</p>
+  </div>
+</div>
+```
+*/
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-image img {
+  transform: scale(1.05);
+}
