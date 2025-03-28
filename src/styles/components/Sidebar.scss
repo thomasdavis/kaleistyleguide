@@ -1,0 +1,135 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+/*
+# Sidebar Component Styles
+Styles for the navigation sidebar in the Kalei Style Guide
+*/
+
+.kalei-sidebar {
+  width: $sidebar-width;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  border-right: 1px solid $border-color;
+  overflow-y: auto;
+  @include transition;
+  z-index: 100;
+  
+  @include media-breakpoint-down(sm) {
+    width: $sidebar-width;
+    transform: translateX(-100%);
+    
+    &.open {
+      transform: translateX(0);
+      @include box-shadow(3);
+    }
+  }
+  
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-md;
+    border-bottom: 1px solid $border-color;
+    height: 60px;
+  }
+}
+
+.kalei-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $primary-color;
+  margin: 0;
+}
+
+.kalei-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: $text-color;
+  
+  @include media-breakpoint-down(sm) {
+    display: block;
+  }
+}
+
+.kalei-nav {
+  padding: $spacing-md;
+  
+  &-home {
+    display: block;
+    padding: $spacing-sm $spacing-md;
+    margin-bottom: $spacing-md;
+    color: $text-color;
+    font-weight: 500;
+    border-radius: 4px;
+    
+    &:hover {
+      background-color: rgba($primary-color, 0.05);
+      text-decoration: none;
+    }
+    
+    &.active {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+  
+  &-list {
+    list-style: none;
+  }
+  
+  &-category {
+    margin-bottom: $spacing-md;
+    
+    h3 {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: $secondary-color;
+      margin-bottom: $spacing-sm;
+      padding: $spacing-xs $spacing-md;
+    }
+    
+    ul {
+      list-style: none;
+      margin-left: $spacing-md;
+    }
+  }
+  
+  &-link {
+    display: block;
+    padding: $spacing-xs $spacing-md;
+    color: $text-color;
+    border-radius: 4px;
+    @include transition;
+    
+    &:hover {
+      background-color: rgba($primary-color, 0.05);
+      text-decoration: none;
+    }
+    
+    &.active {
+      background-color: rgba($primary-color, 0.1);
+      color: $primary-color;
+      font-weight: 500;
+    }
+  }
+}
+
+.kalei-stylesheets-label {
+  padding: $spacing-xs $spacing-md;
+  margin: $spacing-md 0 $spacing-sm;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $accent-color;
+  background-color: rgba($accent-color, 0.1);
+  border-radius: 4px;
+}

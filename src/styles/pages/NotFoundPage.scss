@@ -1,0 +1,54 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+/*
+# NotFoundPage Component Styles
+Styles for the 404 page
+*/
+
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 70vh;
+  padding: $spacing-xl;
+  
+  h1 {
+    font-size: 8rem;
+    font-weight: 700;
+    color: rgba($primary-color, 0.3);
+    margin-bottom: $spacing-md;
+    
+    @include media-breakpoint-down(sm) {
+      font-size: 6rem;
+    }
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: $spacing-md;
+    color: $text-color;
+    
+    @include media-breakpoint-down(sm) {
+      font-size: 1.5rem;
+    }
+  }
+  
+  p {
+    font-size: 1.2rem;
+    color: $secondary-color;
+    max-width: 500px;
+    margin: 0 auto $spacing-lg;
+    
+    @include media-breakpoint-down(sm) {
+      font-size: 1rem;
+    }
+  }
+  
+  .btn {
+    padding: $spacing-sm $spacing-xl;
+    font-size: 1.1rem;
+  }
+}

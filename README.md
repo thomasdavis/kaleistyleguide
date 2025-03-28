@@ -1,66 +1,115 @@
-# Kalei - Style guide
+# Kalei Styleguide - Modern Edition
 
-This project aims at making sure your style sheets are fully documented whilst being synchronized with your webpages styles. To do this it actually uses your live stylesheets in so that at anytime you can review how your styleguide looks.
+A living style guide generator that uses your actual CSS to create beautiful documentation.
 
+## What's New in the Modern Edition
 
-## Main goals and benefits
+This is a completely modernized version of the original Kalei Styleguide, featuring:
 
-* Fully documented CSS - No need to explain the benefits
-* No dependencies, simply download the repository and run in your browser
-* Automatic generation of demo UI components
-* Easy access for anyone, designer, developer, manager and users
-* Rapid development of projects by allowing developers to find the correct CSS and HTML for any given UI component
-* Open sourced so that all great ideas can be included
+- Modern React-based architecture
+- Responsive design that works on all devices
+- Enhanced code highlighting and examples
+- Sass support for advanced styling
+- Improved documentation navigation
+- Vite-powered development environment with hot module replacement
 
+## Getting Started
 
+### Installation
 
+```bash
+# Clone the repository
+git clone https://github.com/kaleistyleguide/kaleistyleguide.git
+cd kaleistyleguide
 
+# Install dependencies
+npm install
+```
 
-## Getting started
+### Development
 
-1. Download the repository (`git clone git://github.com/kaleistyleguide/kaleistyleguide.git`)
-2. Serve it on a HTTP server and it should work!
-3. Edit `js/config.js` to point at your own `styles.css`
+```bash
+# Copy CSS assets to public directory
+./copy-assets.sh
 
+# Start development server
+npm run dev
+```
 
-## Author
+### Building for Production
 
-[Thomas Davis](http://thomasdavis.github.com)
+```bash
+# Build the application
+npm run build
 
-## Contributors
+# Preview the production build
+npm run preview
+```
 
-Luke Brooker
-[Richard Barret](http://richardbarrett.github.io)
-[Sam Pospischil](http://pospi.spadgos.com)
+## Configuration
 
+You can configure Kalei by editing the `src/config.js` file:
 
+```javascript
+const config = {
+  // CSS path is used as the primary stylesheet to parse
+  css_path: '/css/styles.css',
+  
+  // Choose the CSS processor to use
+  css_processor: 'jscssp', // Options: 'jscssp', 'sass'
+  
+  // Options for the markdown parser
+  marked_options: {
+    tables: true,
+    gfm: true
+  },
+  
+  // External stylesheets to include
+  external_stylesheets: []
+};
+```
 
-## Inspiration
+## Writing Documentation
 
-Kalei is heavily influenced by the following projects and blog posts.
+Kalei parses CSS comments written in Markdown and transforms them into a living style guide:
 
-[Pea.rs](http://pea.rs/)
+```css
+/*
+# Button Styles 
+Our button system uses a semantic HTML approach with consistent styling.
 
-[KSS](http://warpspire.com/posts/kss/)
+## Primary Button
+Primary buttons are used for main actions.
 
-[StyleDocco](http://jacobrask.github.com/styledocco/)
+```html
+<button class="btn btn-primary">Primary Button</button>
+```
+*/
 
-[RJ Metrics](http://blog.rjmetrics.com/2012/02/20/our-living-style-guide-writing-maintainable-htmlcss/)
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
 
-[Anchoring Your Design Language in a Live Style Guide](http://uxmag.com/articles/anchoring-your-design-language-in-a-live-style-guide)
+.btn-primary {
+  background-color: #0066ff;
+  color: white;
+  border: none;
+}
+```
 
+## Technologies Used
 
-## Technologies
-
-* [marked](https://github.com/chjj/marked)
-* [jscssp](http://www.glazman.org/JSCSSP/)
-* [LESS](http://lesscss.org/)
-* cssbeautify
-* [fixie](http://fixiejs.com/)
-* [highlight](http://softwaremaniacs.org/soft/highlight/en/)
-* [backbone](http://backbonejs.org/)
-* [underscore](http://underscorejs.org/)
-* [jquery](http://jquery.com)
+- React
+- Vite
+- Sass
+- ESLint & Prettier
+- Jest
+- marked
+- highlight.js
 
 ## License
 

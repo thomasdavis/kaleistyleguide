@@ -1,0 +1,14 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+/*
+# Layout Component Styles
+Styles for the main layout container in the Kalei Style Guide
+*/
+
+.kalei-app {
+  min-height: 100vh;
+  display: flex;
+}
+
+// The main content container is defined in index.scss

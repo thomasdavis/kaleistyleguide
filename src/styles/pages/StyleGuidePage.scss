@@ -1,0 +1,62 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+/*
+# StyleGuidePage Component Styles
+Styles for the page that displays individual stylesheets documentation
+*/
+
+.style-guide-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.style-guide-header {
+  margin-bottom: $spacing-xl;
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: $spacing-sm;
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid $border-color;
+    
+    @include media-breakpoint-down(sm) {
+      font-size: 2rem;
+    }
+  }
+  
+  .style-guide-path {
+    color: $secondary-color;
+    font-size: 0.9rem;
+    
+    code {
+      background-color: rgba($primary-color, 0.05);
+      padding: $spacing-xs $spacing-sm;
+      border-radius: 4px;
+      font-family: Monaco, Consolas, 'Courier New', monospace;
+    }
+  }
+}
+
+.style-blocks {
+  margin-bottom: $spacing-xl;
+}
+
+.no-blocks {
+  padding: $spacing-lg;
+  text-align: center;
+  background-color: white;
+  border-radius: 8px;
+  @include box-shadow(1);
+  
+  p {
+    margin-bottom: $spacing-md;
+    color: $secondary-color;
+  }
+  
+  pre {
+    text-align: left;
+    max-width: 600px;
+    margin: $spacing-lg auto 0;
+  }
+}

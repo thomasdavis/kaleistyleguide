@@ -1,0 +1,41 @@
+/*
+# Fixie Example Usage
+
+[fixie.js](http://fixiejs.com/) is bundled with Kalei.
+
+"Just set class to fixie wherever you need dummy content. It works for headers, paragraphs, lists, images, and just about anything else."
+
+## Example Heading and Paragraph
+
+```
+<h3 class="fixie fixie-demo"></h3>
+<p class="fixie fixie-demo"></p>
+```
+*/
+h3.fixie-demo {
+	color: #444;
+}
+p.fixie-demo {
+	color: #555	;
+}
+
+/*
+## Example Fixie Images
+
+```
+<div class="fixie-demo">
+	<img class="fixie" />
+	<img class="fixie" />
+	<img class="fixie" />
+	<img class="fixie" />
+</div>
+```
+*/
+.fixie-demo img {
+	float: left;
+	margin-left: 10px;
+	width:60px;
+	height:60px;
+	padding: 2px;
+	border: 1px solid #ccc;
+}

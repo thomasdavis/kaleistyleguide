@@ -1,0 +1,35 @@
+/*
+# Variables
+Global variables for the Kalei Style Guide
+*/
+
+// Colors
+$primary-color: #0066ff;
+$secondary-color: #6c757d;
+$accent-color: #75eb33;
+$light-bg: #f8f9fa;
+$dark-bg: #343a40;
+$text-color: #333333;
+$text-light: #f8f9fa;
+$border-color: #dee2e6;
+
+// Breakpoints
+$breakpoint-xs: 576px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 3rem;
+
+// Sidebar
+$sidebar-width: 300px;
+$sidebar-width-collapsed: 60px;
+
+// Transitions
+$transition-speed: 0.2s;
+$transition-function: ease-in-out;

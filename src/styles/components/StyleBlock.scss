@@ -1,0 +1,173 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+/*
+# StyleBlock Component Styles
+Styles for individual documentation blocks in the Kalei Style Guide
+*/
+
+.style-block {
+  margin-bottom: $spacing-xl;
+  padding: $spacing-lg;
+  background-color: white;
+  border-radius: 8px;
+  @include box-shadow(1);
+  
+  &-content {
+    margin-bottom: $spacing-lg;
+    
+    h1 {
+      font-size: 2rem;
+      margin-bottom: $spacing-md;
+      color: $text-color;
+      padding-bottom: $spacing-sm;
+      border-bottom: 1px solid $border-color;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      margin-top: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      color: $text-color;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      margin-top: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      color: $text-color;
+    }
+    
+    p {
+      margin-bottom: $spacing-md;
+      line-height: 1.6;
+    }
+    
+    ul, ol {
+      margin-left: $spacing-lg;
+      margin-bottom: $spacing-md;
+      
+      li {
+        margin-bottom: $spacing-xs;
+      }
+    }
+    
+    a {
+      color: $primary-color;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    
+    blockquote {
+      padding: $spacing-md;
+      margin: $spacing-md 0;
+      border-left: 4px solid $primary-color;
+      background-color: rgba($primary-color, 0.05);
+      
+      p {
+        margin-bottom: 0;
+      }
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin: $spacing-md 0;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: $spacing-md 0;
+      
+      th, td {
+        padding: $spacing-sm;
+        border: 1px solid $border-color;
+        text-align: left;
+      }
+      
+      th {
+        background-color: rgba($primary-color, 0.05);
+        font-weight: 600;
+      }
+      
+      tr:nth-child(even) {
+        background-color: rgba($primary-color, 0.02);
+      }
+    }
+  }
+  
+  &-examples {
+    margin-top: $spacing-lg;
+  }
+}
+
+.code-example {
+  margin-bottom: $spacing-lg;
+  border-radius: 8px;
+  overflow: hidden;
+  @include box-shadow(1);
+  
+  &-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  &-toggle {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    @include transition;
+    
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+    
+    &.active {
+      background-color: $secondary-color;
+      
+      &:hover {
+        background-color: darken($secondary-color, 10%);
+      }
+    }
+  }
+  
+  &-language {
+    font-size: 0.875rem;
+    color: $secondary-color;
+    font-family: Monaco, Consolas, 'Courier New', monospace;
+  }
+  
+  &-display {
+    max-height: 0;
+    overflow: hidden;
+    @include transition(max-height, 0.3s);
+    
+    &.expanded {
+      max-height: 500px;
+      overflow: auto;
+    }
+  }
+  
+  pre {
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
+.code-demo {
+  padding: $spacing-lg;
+  background-color: white;
+  border-bottom: 1px solid $border-color;
+}

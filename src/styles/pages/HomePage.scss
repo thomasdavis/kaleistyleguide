@@ -1,0 +1,126 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+/*
+# HomePage Component Styles
+Styles for the home page of the Kalei Style Guide
+*/
+
+.home-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-md;
+}
+
+.home-hero {
+  text-align: center;
+  padding: $spacing-xl 0;
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: $spacing-md;
+    background: linear-gradient(90deg, $primary-color, $accent-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    @include media-breakpoint-down(sm) {
+      font-size: 2.5rem;
+    }
+  }
+  
+  .home-tagline {
+    font-size: 1.25rem;
+    max-width: 800px;
+    margin: 0 auto $spacing-lg;
+    color: $secondary-color;
+    
+    @include media-breakpoint-down(sm) {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .home-buttons {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-md;
+    
+    @include media-breakpoint-down(xs) {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .btn {
+      padding: $spacing-sm $spacing-lg;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.home-features {
+  padding: $spacing-xl 0;
+  background-color: white;
+  border-radius: 8px;
+  @include box-shadow(1);
+  margin-bottom: $spacing-xl;
+  
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-lg;
+    padding: 0 $spacing-lg;
+  }
+  
+  .feature-card {
+    text-align: center;
+    padding: $spacing-lg;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: $spacing-md;
+    }
+    
+    h3 {
+      margin-bottom: $spacing-sm;
+      color: $primary-color;
+    }
+    
+    p {
+      color: $secondary-color;
+      line-height: 1.6;
+    }
+  }
+}
+
+.home-getting-started {
+  padding: $spacing-xl;
+  background-color: white;
+  border-radius: 8px;
+  @include box-shadow(1);
+  
+  h2 {
+    margin-bottom: $spacing-lg;
+    text-align: center;
+    color: $text-color;
+  }
+  
+  ol {
+    max-width: 600px;
+    margin: 0 auto $spacing-xl;
+    
+    li {
+      margin-bottom: $spacing-md;
+      line-height: 1.6;
+    }
+  }
+  
+  .code-example {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
